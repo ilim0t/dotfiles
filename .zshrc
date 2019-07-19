@@ -81,9 +81,6 @@ colors
 # PROMPT変数内で変数参照する
 setopt prompt_subst
 
-# cdを省略できる
-# setopt auto_cd
-
 # コマンドのスペルミスを指摘
 setopt correct
 
