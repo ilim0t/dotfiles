@@ -1,28 +1,33 @@
 # Created by ilim0t14 for 5.6.2
 # .zshrc キャッシュ生成
 
-if [ ~/.zshrc -nt ~/.zshrc.zwc ]; then
-  zcompile ~/.zshrc
+if [ ${HOME}/.zshrc -nt ${HOME}/.zshrc.zwc ]; then
+  zcompile ${HOME}/.zshrc
 fi
 
 # 環境変数の設定
 export PYENV_ROOT="$HOME/.pyenv"
 export EDITOR=vim
 path=(
-    ~/.local/bin(N-/) # added by pipx (https://github.com/pipxproject/pipx)
+    $HOME/.local/bin(N-/) # added by pipx (https://github.com/pipxproject/pipx)
     /usr/local/sbin(N-/)
     $PYENV_ROOT/bin(N-/)
+    $HOME/.nodebrew/current/bin(N-/)
     $path
 )
+
+# iTerm2
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
 
 # pyenv 初期化
 eval "$(pyenv init -)"
 eval "$(direnv hook zsh)"
-export PIPENV_VENV_IN_PROJECT=true
-export PIPENV_SKIP_LOCK=true
+export PIPENV_VENV_IN_PROJECT=1
+export PIPENV_SKIP_LOCK=1
 
 # zplug settings
-source ~/.zplug/init.zsh
+source ${HOME}/.zplug/init.zsh
 
 # plugins
 zplug 'zplug/zplug', hook-build:'zplug --self-manage'
@@ -68,12 +73,18 @@ export PROMPT="${DIR_PROMPT}${SEP1}${BRANCH_PROMPT}${SEP2}${AAA}${SEP3}"
 alias tree="tree -N"
 alias gitlog="git log --oneline --decorate --graph --branches --tags --remotes"
 alias tb="tensorboard --logdir result --samples_per_plugin images=40"
-if [ "$(uname)" == 'Darwin' ]; then
+alias brew="env PATH=${PATH//$(pyenv root)\/shims:/} brew"
+
+if [ "$(uname)" = 'Darwin' ]; then
     alias ls="ls -G"
 else
     alias ls="ls --color=auto"
 fi
-alias brew="env PATH=${PATH//$(pyenv root)\/shims:/} brew"
+
+if type trash-put &> /dev/null
+then
+    alias rm=trash-put
+fi
 
 # 文字コード指定
 export LANG=ja_JP.UTF-8
@@ -112,16 +123,6 @@ bindkey "^A" vi-beginning-of-line
 bindkey "^E" vi-end-of-line
 bindkey "^R" history-incremental-search-backward
 
-# 計測用
-# if type zprof > /dev/null 2>&1; then
-#   zprof | less
-# fi
-
-if type trash-put &> /dev/null
-then
-    alias rm=trash-put
-fi
-
 google(){
     if [ $(echo $1 | egrep "^-[cfs]$") ]; then
         local opt="$1"
@@ -133,8 +134,8 @@ google(){
     local f="${app}/Firefox.app"
     local s="${app}/Safari.app"
 
-    if [ "$(uname)" == 'Darwin' ]; then
-        export OPEN="optn"
+    if [ "$(uname)" = 'Darwin' ]; then
+        export OPEN="open"
     else
         export OPEN="xdg-open"
     fi
@@ -148,4 +149,7 @@ google(){
     unset OPEN
 }
 
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+# 計測用
+# if type zprof > /dev/null 2>&1; then
+#   zprof | less
+# fi
