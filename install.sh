@@ -18,7 +18,7 @@ curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh >
 sh ./installer.sh ~/.cache/dein
 
 # direnv
-sudo apt install -y direnv
+sudo apt install -y direnvcp
 
 # pyenv
 # sudo apt install -y make build-essential libssl-dev zlib1g-dev libbz2-dev \
@@ -35,3 +35,6 @@ sudo apt -y install pipx
 # tmux
 apt install tmux
 # tmux source ~/.tmux.conf
+
+# trash-cli
+sudo apt -y install trash-cli

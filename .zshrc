@@ -9,6 +9,8 @@ fi
 export PYENV_ROOT="$HOME/.pyenv"
 export EDITOR=vim
 path=(
+    ~/.local/bin(N-/) # added by pipx (https://github.com/pipxproject/pipx)
+    /usr/local/sbin(N-/)
     $PYENV_ROOT/bin(N-/)
     $path
 )
@@ -66,7 +68,12 @@ export PROMPT="${DIR_PROMPT}${SEP1}${BRANCH_PROMPT}${SEP2}${AAA}${SEP3}"
 alias tree="tree -N"
 alias gitlog="git log --oneline --decorate --graph --branches --tags --remotes"
 alias tb="tensorboard --logdir result --samples_per_plugin images=40"
-alias ls="ls -G"
+if [ "$(uname)" == 'Darwin' ]; then
+    alias ls="ls -G"
+else
+    alias ls="ls --color=auto"
+fi
+alias brew="env PATH=${PATH//$(pyenv root)\/shims:/} brew"
 
 # 文字コード指定
 export LANG=ja_JP.UTF-8
@@ -125,12 +132,20 @@ google(){
     local g="${app}/Google Chrome.app"
     local f="${app}/Firefox.app"
     local s="${app}/Safari.app"
+
+    if [ "$(uname)" == 'Darwin' ]; then
+        export OPEN="optn"
+    else
+        export OPEN="xdg-open"
+    fi
+
     case ${opt} in
-        "-g")   open "${url}" -a "$g";;
-        "-f")   open "${url}" -a "$f";;
-        "-s")   open "${url}" -a "$s";;
-        *)      open "${url}";;
+        "-g")   ${OPEN} "${url}" -a "$g";;
+        "-f")   ${OPEN} "${url}" -a "$f";;
+        "-s")   ${OPEN} "${url}" -a "$s";;
+        *)      ${OPEN} "${url}";;
     esac
+    unset OPEN
 }
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
