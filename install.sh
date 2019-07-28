@@ -12,6 +12,8 @@ export ZPLUG_HOME=/path/to/.zplug
 curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
 chsh -s $(which zsh)
 
+sudo apt install fzy
+
 # vim
 sudo apt install -y vim curl
 curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh >installer.sh
