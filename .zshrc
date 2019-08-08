@@ -149,6 +149,8 @@ google(){
     unset OPEN
 }
 
+alias lzd='lazydocker'
+
 # 計測用
 # if type zprof > /dev/null 2>&1; then
 #   zprof | less

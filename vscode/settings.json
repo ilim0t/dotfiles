@@ -45,7 +45,15 @@
     {
       "name": "ptex2pdf",
       "command": "ptex2pdf",
-      "args": ["-l", "-ot", "-kanji=utf8 -synctex=1", "%DOC%"]
+      "args": [
+        "-l",
+        "-ot",
+        "-kanji=utf8",
+        "-synctex=1",
+        "-interaction=nonstopmode", // これdev
+        "-file-line-error", // これdev
+        "%DOC%"
+      ]
     },
     {
       "name": "bibtex",
