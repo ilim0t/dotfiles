@@ -1,10 +1,18 @@
 #!/bin/bash
 set -u
 
+# chrome
+sudo snap install chromium
+# Jetbrains Toolbox
+# Slack
+sudo snap install slack --classic
+# VSCode
+sudo snap install code-insiders --classic
+
 sudo apt update
 
 # general
-sudo apt -y install htop
+sudo apt -y install htop cmake
 
 # zsh
 sudo apt -y install zsh git gawk curl
@@ -33,23 +41,65 @@ curl https://pyenv.run | bash
 # Ubuntu 19.04
 sudo apt -y install pipenv
 # それ以外
-pip install pipenv
-
-# pipx
-# Ubuntu 19.04
-sudo apt -y install pipx
-# それ以外
-pip install pipx
+sudo apt install -y python3-pip
+pip3 install --user pipenv
 
 # tmux
-apt install tmux
+sudo apt install -y tmux
 # tmux source ~/.tmux.conf
 
 # trash-cli
 sudo apt -y install trash-cli
 
 # nodejs
-sudo apt install nodejs npm
+sudo apt install -y nodejs npm
 sudo npm install -g n
 sudo n stable
 sudo apt purge nodejs npm
+
+# tig
+sudo apt install -y tig
+
+# Docker
+sudo apt-get install -y \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg-agent \
+    software-properties-common
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
+sudo apt-get update
+sudo apt-get install -y docker-ce docker-ce-cli containerd.io
+
+sudo groupadd docker
+sudo gpasswd -a $USER docker
+sudo systemctl restart docker
+
+# docker-compose
+sudo curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+
+# nvtop
+# Ubuntu 19.04
+sudo apt install -y nvttop
+
+# else
+git clone https://github.com/Syllo/nvtop.git
+mkdir -p nvtop/build && cd nvtop/build
+cmake ..
+
+# If it errors with "Could NOT find NVML (missing: NVML_INCLUDE_DIRS)"
+# try the following command instead, otherwise skip to the build with make.
+cmake .. -DNVML_RETRIEVE_HEADER_ONLINE=True
+
+make
+make install
+
+# CUDA
+# https://developer.nvidia.com/cuda-downloads ni sitagau
+sudo apt isntall -y cuda-10-0
