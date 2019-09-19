@@ -13,7 +13,12 @@ path=(
     /usr/local/sbin(N-/)
     $PYENV_ROOT/bin(N-/)
     $HOME/.nodebrew/current/bin(N-/)
+    /usr/local/cuda/bin(N-/)
     $path
+)
+LD_LIBRARY_PATH=(
+    /usr/local/cuda/lib64(N-/)
+    $LD_LIBRARY_PATH 
 )
 
 # iTerm2
