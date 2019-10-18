@@ -93,8 +93,11 @@ sudo apt-get update && sudo apt-get install -y nvidia-container-toolkit
 sudo systemctl restart docker
 sudo apt install -y nvidia-docker2
 
+# Lazy Docker
+curl https://raw.githubusercontent.com/jesseduffield/lazydocker/master/scripts/install_update_linux.sh | bash
+
 # CUDA
-# https://developer.nvidia.com/cuda-downloads ni sitagau
+# https://developer.nvidia.com/cuda-downloads に従う
 sudo apt isntall -y cuda-10-0
 
 # nvtop
