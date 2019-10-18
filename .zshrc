@@ -155,8 +155,14 @@ google(){
 }
 
 alias lzd='lazydocker'
+alias pbcopy='xsel --clipboard --input'
+
+if [ "$(uname)" = 'Linux' ]; then
+    alias open='xdg-open'
+fi
 
 # 計測用
 # if type zprof > /dev/null 2>&1; then
 #   zprof | less
 # fi
+
