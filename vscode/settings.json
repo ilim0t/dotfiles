@@ -1,7 +1,8 @@
 {
   // General Settings
-  "editor.fontFamily": "Ricty, SF Mono Square",
+  "editor.fontFamily": "Ricty,Cica,Myrica M,Source Han Code JP,Fira Code,SF Mono Square",
   "editor.fontSize": 15,
+  "editor.fontLigatures": true,
 
   "terminal.integrated.fontFamily": "Ricty for Powerline, SF Mono Square",
   "terminal.integrated.fontSize": 15,
@@ -88,7 +89,8 @@
 
   // JavaScript Settings
   "eslint.enable": true,
-  "prettier.eslintIntegration": true,
+  "prettier-eslint.eslintIntegration": true,
+  "eslint.autoFixOnSave": true,
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
