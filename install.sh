@@ -7,7 +7,7 @@ sudo snap install chromium
 # Slack
 sudo snap install slack --classic
 # VSCode
-sudo snap install code-insiders --classic
+sudo snap install code --classic
 
 sudo apt update
 
@@ -30,17 +30,12 @@ sh ./installer.sh ~/.cache/dein
 sudo apt install -y direnv
 
 # pyenv
-
-# Ubuntu 19以下なら実行
 sudo apt install -y make build-essential libssl-dev zlib1g-dev libbz2-dev \
     libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev \
     xz-utils tk-dev libffi-dev liblzma-dev python-openssl git
 curl https://pyenv.run | bash
 
 # pipenv
-# Ubuntu 19.04
-sudo apt -y install pipenv
-# それ以外
 sudo apt install -y python3-pip
 pip3 install --user pipenv
 
@@ -55,7 +50,7 @@ sudo apt -y install trash-cli
 sudo apt install -y nodejs npm
 sudo npm install -g n
 sudo n stable
-sudo apt purge nodejs npm
+sudo apt purge -y nodejs npm
 
 # tig
 sudo apt install -y tig
@@ -80,7 +75,7 @@ sudo gpasswd -a $USER docker
 sudo systemctl restart docker
 
 # docker-compose
-sudo curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo curl -L "https://github.com/docker/compose/releases/download/1.25.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 
@@ -98,15 +93,13 @@ curl https://raw.githubusercontent.com/jesseduffield/lazydocker/master/scripts/i
 
 # CUDA
 # https://developer.nvidia.com/cuda-downloads に従う
-sudo apt isntall -y cuda-10-0
+sudo apt isntall -y cuda-10-1
 
 # nvtop
-# Ubuntu 19.04
-sudo apt install -y nvttop
-
-# else
 git clone https://github.com/Syllo/nvtop.git
 mkdir -p nvtop/build && cd nvtop/build
 cmake ..
-
 sudo make install
+
+cd ../../
+rm -rf nvtop
