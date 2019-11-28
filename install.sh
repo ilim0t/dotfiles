@@ -103,3 +103,6 @@ sudo make install
 
 cd ../../
 rm -rf nvtop
+
+# xsel
+sudo apt install -y xsel
