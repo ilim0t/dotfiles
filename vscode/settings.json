@@ -1,6 +1,6 @@
 {
   // General Settings
-  "editor.fontFamily": "Ricty,Cica,Myrica M,Source Han Code JP,Fira Code,SF Mono Square",
+  "editor.fontFamily": "Ricty,Cica,Myrica M,Source Han Code JP,Cascadia Code,Fira Code,SF Mono Square",
   "editor.fontSize": 15,
   "editor.fontLigatures": true,
 
