@@ -1,7 +1,11 @@
 #!/bin/bash
 set -u
 
-# chrome
+# git
+sudo add-apt-repository -y ppa:git-core/ppa
+sudo apt install -y git
+
+# chromium
 sudo snap install chromium
 # Jetbrains Toolbox
 # Slack
@@ -37,6 +41,10 @@ curl https://pyenv.run | bash
 
 # pipenv
 sudo apt install -y python3-pip
+pip3 install --user pipenv
+
+# pipx
+sudo apt install -y python3-venv
 pip3 install --user pipenv
 
 # tmux
@@ -77,7 +85,15 @@ curl https://raw.githubusercontent.com/jesseduffield/lazydocker/master/scripts/i
 
 # CUDA
 # https://developer.nvidia.com/cuda-downloads に従う
-sudo apt isntall -y cuda-10-1
+wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-ubuntu1804.pin
+sudo mv cuda-ubuntu1804.pin /etc/apt/preferences.d/cuda-repository-pin-600
+sudo apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/7fa2af80.pub
+sudo add-apt-repository "deb http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/ /"
+sudo apt-get update
+sudo apt-get -y install cuda
+
+# cuDNN
+# https://developer.nvidia.com/rdp/cudnn-download に従い3つのdebをinstallする
 
 # nvtop
 git clone https://github.com/Syllo/nvtop.git
