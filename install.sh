@@ -5,9 +5,6 @@ set -u
 sudo add-apt-repository -y ppa:git-core/ppa
 sudo apt install -y git
 
-# chromium
-sudo snap install chromium
-# Jetbrains Toolbox
 # Slack
 sudo snap install slack --classic
 # VSCode
@@ -45,7 +42,7 @@ pip3 install --user pipenv
 
 # pipx
 sudo apt install -y python3-venv
-pip3 install --user pipenv
+pip3 install --user pipx
 
 # tmux
 sudo apt install -y tmux
@@ -64,21 +61,24 @@ sudo apt purge -y nodejs npm
 sudo apt install -y tig
 
 # Docker
-sudo apt install -y uidmap
-curl -fsSL https://get.docker.com/rootless | sh
+sudo apt-get install -y \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg-agent \
+    software-properties-common
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
+sudo apt-get update
+sudo apt-get install -y docker-ce docker-ce-cli containerd.io
 
 # docker-compose
 sudo curl -L "https://github.com/docker/compose/releases/download/1.25.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
-
-# nvidia-docker2
-distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
-curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add -
-curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.list | sudo tee /etc/apt/sources.list.d/nvidia-docker.list
-
-sudo apt-get update && sudo apt-get install -y nvidia-container-toolkit nvidia-docker2
-sudo systemctl restart docker
 
 # Lazy Docker
 curl https://raw.githubusercontent.com/jesseduffield/lazydocker/master/scripts/install_update_linux.sh | bash
@@ -103,6 +103,14 @@ sudo make install
 
 cd ../../
 rm -rf nvtop
+
+# nvidia-docker2
+distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
+curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add -
+curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.list | sudo tee /etc/apt/sources.list.d/nvidia-docker.list
+
+sudo apt-get update && sudo apt-get install -y nvidia-container-toolkit nvidia-docker2
+sudo systemctl restart docker
 
 # xsel
 sudo apt install -y xsel
