@@ -14,3 +14,6 @@ pyenv install 3.8.0
 
 # cpplint
 pipx install cpplint
+
+# Rust
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh

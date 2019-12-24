@@ -161,7 +161,7 @@ if [ "$(uname)" = 'Linux' ]; then
     alias open='xdg-open'
 fi
 
-export DOCKER_HOST=unix:///run/user/1000/docker.sock
+source $HOME/.cargo/env
 
 # 計測用
 # if type zprof > /dev/null 2>&1; then
