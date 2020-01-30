@@ -5,8 +5,8 @@ set -u
 sudo add-apt-repository -y ppa:git-core/ppa
 sudo apt install -y git
 
-# Slack
-sudo snap install slack --classic
+# Slack deb版でないと日本語入力ができないためコメントアウト
+# sudo snap install slack --classic
 # VSCode
 sudo snap install code --classic
 
