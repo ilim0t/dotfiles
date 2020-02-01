@@ -6,30 +6,20 @@ if [ ${HOME}/.zshrc -nt ${HOME}/.zshrc.zwc ]; then
 fi
 
 # 環境変数の設定
-export PYENV_ROOT="$HOME/.pyenv"
 export EDITOR=vim
 path=(
     $HOME/.local/bin(N-/) # added by pipx (https://github.com/pipxproject/pipx)
-    /usr/local/sbin(N-/)
-    $PYENV_ROOT/bin(N-/)
-    $HOME/.nodebrew/current/bin(N-/)
+    /usr/local/sbin(N-/)  # brew doctor より
+    $HOME/.nodebrew/current/bin(N-/)  # nodebrew
     /usr/local/cuda/bin(N-/)
     $path
 )
-LD_LIBRARY_PATH=(
+
+export LD_LIBRARY_PATH=(
     /usr/local/cuda/lib64(N-/)
     $LD_LIBRARY_PATH 
 )
 
-# iTerm2
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-
-
-# pyenv 初期化
-eval "$(pyenv init -)"
-eval "$(direnv hook zsh)"
-export PIPENV_VENV_IN_PROJECT=1
-export PIPENV_SKIP_LOCK=1
 
 # zplug settings
 source ${HOME}/.zplug/init.zsh
@@ -156,11 +146,26 @@ google(){
 
 alias lzd='lazydocker'
 alias pbcopy='xsel --clipboard --input'
+# pyenv
+if (( $+commands[pyenv] )); then
+    # eval "$(pyenv init -)"
+    export PIPENV_VENV_IN_PROJECT=1
+    export PIPENV_SKIP_LOCK=1
+fi
 
 if [ "$(uname)" = 'Linux' ]; then
     alias open='xdg-open'
+
+# direnv setting
+# export EDITOR=vim
+eval "$(direnv hook zsh)"
+
+# iTerm2 shell_integration (https://www.iterm2.com/documentation-shell-integration.html)
+if [ -e "$HOME/.iterm2_shell_integration.zsh" ]; then
+    source "$HOME/.iterm2_shell_integration.zsh"
 fi
 
+# cargo setting
 source $HOME/.cargo/env
 
 # 計測用
