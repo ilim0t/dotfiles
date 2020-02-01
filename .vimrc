@@ -19,6 +19,7 @@ set softtabstop=2 " 連続した空白に対してタブキーやバックスペ
 set autoindent " 改行時に前の行のインデントを継続する
 set smartindent " 改行時に入力された行の末尾に合わせて次の行のインデントを増減する
 
+"dein Scripts-----------------------------
 if &compatible
   set nocompatible " Be iMproved
 endif
@@ -37,12 +38,12 @@ if dein#load_state('~/.cache/dein')
   " Add or remove your plugins here:
   call dein#add('Shougo/neosnippet.vim')
   call dein#add('Shougo/neosnippet-snippets')
-  call dein#add('jacoborus/tender.vim')
+   call dein#add('jacoborus/tender.vim')
   call dein#add('itchyny/lightline.vim')
-
+  
   " You can specify revision/branch/tag.
   call dein#add('Shougo/deol.nvim', { 'rev': '01203d4c9' })
-
+  
   " Required:
   call dein#end()
   call dein#save_state()
@@ -56,6 +57,8 @@ syntax enable
 if dein#check_install()
   call dein#install()
 endif
+
+"End dein Scripts-------------------------
 
 " If you have vim >=8.0 or Neovim >= 0.1.5
 if (has("termguicolors"))
