@@ -1,12 +1,16 @@
 # Created by ilim0t14 for 5.6.2
-# .zshrc キャッシュ生成
 
-if [ ${HOME}/.zshrc -nt ${HOME}/.zshrc.zwc ]; then
-  zcompile ${HOME}/.zshrc
+# zsh起動時の速度計測用 (不要なら以下1行をコメントアウト)
+# zmodload zsh/zprof && zprof
+
+
+# .zshrc のキャッシュを生成
+if [ ! -e $HOME/.zshrc.zwc ] || [ $HOME/.zshrc -nt $HOME/.zshrc.zwc ]; then
+  zcompile $HOME/.zshrc
 fi
 
+
 # 環境変数の設定
-export EDITOR=vim
 path=(
     $HOME/.local/bin(N-/) # added by pipx (https://github.com/pipxproject/pipx)
     /usr/local/sbin(N-/)  # brew doctor より
@@ -21,10 +25,10 @@ export LD_LIBRARY_PATH=(
 )
 
 
-# zplug settings
-source ${HOME}/.zplug/init.zsh
+# zplugの読み込み
+source $HOME/.zplug/init.zsh
 
-# plugins
+# zplug plugins
 zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-autosuggestions" # 実行したことがあるコマンドの続きを薄く表示 右キーで補完
@@ -45,66 +49,41 @@ fi
 # Then, source plugins and add commands to $PATH
 zplug load  --verbose
 
-# PROMPTの設定
-autoload -Uz vcs_info
-zstyle ':vcs_info:git:*' check-for-changes true
-zstyle ':vcs_info:git:*' stagedstr "!"
-zstyle ':vcs_info:git:*' unstagedstr "+"
-zstyle ':vcs_info:*' formats "%c%u%b"
-zstyle ':vcs_info:*' actionformats "%b|%a"
 
-precmd() { vcs_info }
-DIR_PROMPT="%K{green}%F{white} %~ %k%f"
-SEP1="%F{green}%K{blue}%k%f"
-BRANCH_PROMPT="%F{white}%K{blue} "'${vcs_info_msg_0_}'" %k%f%"
-SEP2="F{blue}%K{black}%k%f"
-AAA="%(?,%F{white},%F{red})%K{black} %(!,#,$) %k%f"
-SEP3="%F{black}%f"
-export PROMPT="${DIR_PROMPT}${SEP1}${BRANCH_PROMPT}${SEP2}${AAA}${SEP3}"
+# zshの設定
 
-# カスタマイズ
+# autoload
 
-# Alias
-alias tree="tree -N"
-alias gitlog="git log --oneline --decorate --graph --branches --tags --remotes"
-alias tb="tensorboard --logdir result --samples_per_plugin images=40"
-alias brew="env PATH=${PATH//$(pyenv root)\/shims:/} brew"
-
-if [ "$(uname)" = 'Darwin' ]; then
-    alias ls="ls -G"
-else
-    alias ls="ls --color=auto"
-fi
-
-if type trash-put &> /dev/null
-then
-    alias rm=trash-put
-fi
-
-# 文字コード指定
-export LANG=ja_JP.UTF-8
-
-# 保管機能を有効に (他で読み込まれてるので省略)
+# 補完機能を有効に (既に他で読み込まれてるので軽量化のためコメントアウト)
 # autoload -Uz compinit && compinit
 
-# 色を使用出来るようにする
-autoload -Uz colors
-colors
+# 色を文字で指定出来るようにする (Promptに限らず，black, greenなどと表現可能に)
+autoload -Uz colors && colors
 
-# PROMPT変数内で変数参照する
+# vcs_info関数をロード (Prompt内にgitの状況を表示するために利用)
+autoload -Uz vcs_info
+
+# setopt
+
+# PROMPT内の変数参照を展開する
 setopt prompt_subst
 
-# コマンドのスペルミスを指摘
+# コマンドのスペルミスを指摘する
 setopt correct
 
-# ビープ音の停止
+#引数のスペルの訂正を使用する
+unsetopt CORRECT_ALL
+
+# ビープ音削除
 setopt no_beep
 
-# 補完候補表示時のビープ音停止
+# 補完候補表示時のビープ音削除
 setopt nolistbeep
 
 # Ctrl-Dを無効に
 setopt ignore_eof
+
+# zstyle
 
 # 補完のファイル, フォルダも ls -G と同じく色がつくように
 export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
@@ -118,34 +97,45 @@ bindkey "^A" vi-beginning-of-line
 bindkey "^E" vi-end-of-line
 bindkey "^R" history-incremental-search-backward
 
-google(){
-    if [ $(echo $1 | egrep "^-[cfs]$") ]; then
-        local opt="$1"
-        shift
-    fi
-    local url="https://www.google.co.jp/search?q=${*// /+}"
-    local app="/Applications"
-    local g="${app}/Google Chrome.app"
-    local f="${app}/Firefox.app"
-    local s="${app}/Safari.app"
 
-    if [ "$(uname)" = 'Darwin' ]; then
-        export OPEN="open"
-    else
-        export OPEN="xdg-open"
-    fi
+# Prompt setting
+# 参照: http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html
 
-    case ${opt} in
-        "-g")   ${OPEN} "${url}" -a "$g";;
-        "-f")   ${OPEN} "${url}" -a "$f";;
-        "-s")   ${OPEN} "${url}" -a "$s";;
-        *)      ${OPEN} "${url}";;
-    esac
-    unset OPEN
+# precmd はprompt表示毎に実行される関数
+# 他に用いないので add-zsh-hook を使うのではなく直接定義する
+precmd() {
+    vcs_info
 }
 
-alias lzd='lazydocker'
-alias pbcopy='xsel --clipboard --input'
+# vcsの表示設定
+zstyle ':vcs_info:git:*' check-for-changes true
+zstyle ':vcs_info:git:*' stagedstr "!"
+zstyle ':vcs_info:git:*' unstagedstr "+"
+zstyle ':vcs_info:*' formats "%c%u%b"
+zstyle ':vcs_info:*' actionformats "%b|%a"
+
+TEXT_COLOR="white"
+COLOR1="green"
+COLOR2="blue"
+COLOR3="black"
+
+# %F: 文字色
+# %K: 背景色
+# %f, %k: それぞれの色のリセット
+
+# %~: カレントディレクトリ(フルパス, home以下省略)
+DIR_PROMPT="%K{$COLOR1}%F{$TEXT_COLOR} %~ %k%f"
+SEP1="%K{$COLOR2}%F{$COLOR1}%k%f"
+BRANCH_PROMPT="%K{$COLOR2}%F{$TEXT_COLOR} "'${vcs_info_msg_0_}'" %k%f"
+SEP2="%K{$COLOR3}%F{$COLOR2}%k%f"
+# %(A,B,C): if A then B else C
+# ?: 直前コマンドの返り値
+# !: rootユーザーかどうか
+MARK_PROMPT="%K{$COLOR3}%(?,%F{$TEXT_COLOR},%F{red}) %(!,#,$) %k%f"
+SEP3="%F{$COLOR3}%f"
+export PROMPT="${DIR_PROMPT}${SEP1}${BRANCH_PROMPT}${SEP2}${MARK_PROMPT}${SEP3}"
+
+
 # pyenv
 if (( $+commands[pyenv] )); then
     # eval "$(pyenv init -)"
@@ -153,22 +143,58 @@ if (( $+commands[pyenv] )); then
     export PIPENV_SKIP_LOCK=1
 fi
 
-if [ "$(uname)" = 'Linux' ]; then
-    alias open='xdg-open'
 
-# direnv setting
-# export EDITOR=vim
+# direnv 読み込み
+# export EDITOR=vim  (意味がなさそうなのでコメントアウト 問題なければ削除)
 eval "$(direnv hook zsh)"
 
-# iTerm2 shell_integration (https://www.iterm2.com/documentation-shell-integration.html)
+# iTerm2 shell_integration 読み込み (https://www.iterm2.com/documentation-shell-integration.html)
 if [ -e "$HOME/.iterm2_shell_integration.zsh" ]; then
     source "$HOME/.iterm2_shell_integration.zsh"
 fi
 
-# cargo setting
+# cargo 読み込み
 source $HOME/.cargo/env
 
-# 計測用
-# if type zprof > /dev/null 2>&1; then
-#   zprof | less
-# fi
+# 文字コード指定
+# export LANG="ja_JP.UTF-8" (もともとされてたのでコメントアウト 問題なければ削除)
+
+
+# alias
+alias tree="tree -N"  # 日本語を文字化けせずに表示するため
+alias gitlog="git log --oneline --decorate --graph --branches --tags --remotes"
+alias lzd='lazydocker'  # 短縮
+
+# alias tb="tensorboard --logdir result --samples_per_plugin images=40"
+# alias brew="env PATH=${PATH//$(pyenv root)\/shims:/} brew"
+
+# ls を色付きに
+if [ $(uname) = "Darwin" ]; then
+    alias ls="ls -G"
+elif [ $(uname) = 'Linux' ]; then
+    alias open='xdg-open'
+    alias ls="ls --color=auto"
+fi
+
+# rm をゴミ箱へ移動させるコマンドへ変更
+if (( $+commands[trash-put] )); then
+    alias rm=trash-put
+fi
+
+# shellからGoogle検索しそのページをブラウザで開くような関数
+google(){
+    echo $*
+    local url="https://www.google.co.jp/search?q=${*// /+}"  # ${変数名//置換前文字列/置換後文字列} で置換
+
+    if (( $+commands[xdg-open] )); then
+        xdg-open $url
+    else
+        open $url
+    fi
+}
+
+
+# zmodload が読み込まれている場合、計測結果を表示する
+if (which zprof > /dev/null) ;then
+  zprof | less
+fi
