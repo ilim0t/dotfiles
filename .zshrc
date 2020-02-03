@@ -14,6 +14,7 @@ fi
 path=(
     $HOME/.local/bin(N-/)  # added by pipx (https://github.com/pipxproject/pipx)
     /usr/local/sbin(N-/)  # brew doctor より
+    $HOME/.pyenv/bin(N-/)  # pyenv installer より
     $HOME/.nodebrew/current/bin(N-/)  # nodebrew
     /usr/local/cuda/bin(N-/)
     $path
@@ -35,6 +36,12 @@ zplug "zsh-users/zsh-completions"  # 補完される辞書の追加
 zplug "zsh-users/zsh-history-substring-search"  # 途中まで打ったコマンドの続きを履歴から検索 (^P, ^N に設定した)
 zplug "zsh-users/zsh-syntax-highlighting", defer:2  # https://github.com/zsh-users/zsh-syntax-highlighting
 zplug "b4b4r07/enhancd", use:init.sh  # cdコマンドでインタラクティブにあいまい検索  fzy等のinstallが必要
+zplug "plugins/docker-compose", from:oh-my-zsh
+zplug "plugins/docker", from:oh-my-zsh
+zplug "plugins/extract", from:oh-my-zsh
+zplug "plugins/gitignore", from:oh-my-zsh
+zplug "lib/clipboard", from:oh-my-zsh
+zplug "lib/key-bindings", from:oh-my-zsh
 
 # Install plugins if there are plugins that have not been installed
 if ! zplug check --verbose; then
@@ -90,7 +97,7 @@ setopt extended_history
 # リダイレクト時(command > path)に既にファイルがある場合上書きできないようにする (やりたいときは >! を使う)
 setopt noclobber
 
-# # zstyle
+# zstyle
 
 # 補完において
 zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}'  # 大文字小文字の区別をしない
@@ -112,6 +119,8 @@ if zplug check "zsh-users/zsh-history-substring-search"; then
     bindkey '^P' history-substring-search-up
     bindkey '^N' history-substring-search-down
 fi
+
+export HISTFILE="$HOME/.zsh_history"
 
 
 # Prompt setting
@@ -141,21 +150,23 @@ if [[ ${SSH_CONNECTION} ]] ; then
     export RPROMPT="%F{red}%K{red}%F{white} ${$(hostname)//.local/} "  # ${変数名//置換前文字列/置換後文字列} で置換
 fi
 
+export PROMPT="${DIR_PROMPT}"'${BRANCH_PROMPT}'"${MARK_PROMPT}${END_PROMPT}" 
+
 # precmd はprompt表示毎に実行される関数
 # 他に用いないので add-zsh-hook を使うのではなく直接定義する
 precmd() {
     if git rev-parse 2> /dev/null; then
         vcs_info
-        export PROMPT="${DIR_PROMPT}${BRANCH_PROMPT}${MARK_PROMPT}${END_PROMPT}" 
+        BRANCH_PROMPT="%K{blue}%F{16} ${vcs_info_msg_0_} %k%F{blue}"
     else
-        export PROMPT="${DIR_PROMPT}${MARK_PROMPT}${END_PROMPT}" 
+        BRANCH_PROMPT=""
     fi
 }
 
 
 # pyenv
 if (( $+commands[pyenv] )); then
-    # eval "$(pyenv init -)"
+    eval "$(pyenv init -)"
     export PIPENV_VENV_IN_PROJECT=1
     export PIPENV_SKIP_LOCK=1
 fi
@@ -196,10 +207,6 @@ case $OSTYPE in
 
         # OS間の互換性のため
         alias open="xdg-open"
-
-        alias pbcopy="xsel --clipboard --input"
-        alias pbcopy='xclip -selection clipboard'
-        alias pbpaste='xclip -o -selection clipboard'        
         ;;
 esac
 
