@@ -117,4 +117,4 @@ sudo apt-get update && sudo apt-get install -y nvidia-container-toolkit nvidia-d
 sudo systemctl restart docker
 
 # xsel
-sudo apt install -y xsel
+sudo apt install -y xclip

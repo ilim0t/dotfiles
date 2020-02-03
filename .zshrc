@@ -185,13 +185,23 @@ alias lzd='lazydocker'  # 短縮
 # alias tb="tensorboard --logdir result --samples_per_plugin images=40"
 # alias brew="env PATH=${PATH//$(pyenv root)\/shims:/} brew"
 
-# ls を色付きに
-if [ $(uname) = "Darwin" ]; then
-    alias ls="ls -G"
-elif [ $(uname) = 'Linux' ]; then
-    alias open='xdg-open'
-    alias ls="ls --color=auto"
-fi
+case $OSTYPE in
+    darwin*)
+        # ls を色付きに
+        alias ls="ls -G"
+        ;;
+    linux*)
+        # ls を色付きに
+        alias ls="ls --color=auto"
+
+        # OS間の互換性のため
+        alias open="xdg-open"
+
+        alias pbcopy="xsel --clipboard --input"
+        alias pbcopy='xclip -selection clipboard'
+        alias pbpaste='xclip -o -selection clipboard'        
+        ;;
+esac
 
 # rm をゴミ箱へ移動させるコマンドへ変更
 if (( $+commands[trash-put] )); then
@@ -200,13 +210,12 @@ fi
 
 # shellからGoogle検索しそのページをブラウザで開くような関数
 google(){
-    echo $*
-    local url="https://www.google.co.jp/search?q=${*// /+}"  # ${変数名//置換前文字列/置換後文字列} で置換
+    local URL="https://www.google.co.jp/search?q=${*// /+}"  # ${変数名//置換前文字列/置換後文字列} で置換, *: すべての引数
 
     if (( $+commands[xdg-open] )); then
-        xdg-open $url
+        xdg-open $URL
     else
-        open $url
+        open $URL
     fi
 }
 
