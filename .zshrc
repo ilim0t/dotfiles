@@ -12,7 +12,7 @@ fi
 
 # 環境変数の設定
 path=(
-    $HOME/.local/bin(N-/) # added by pipx (https://github.com/pipxproject/pipx)
+    $HOME/.local/bin(N-/)  # added by pipx (https://github.com/pipxproject/pipx)
     /usr/local/sbin(N-/)  # brew doctor より
     $HOME/.nodebrew/current/bin(N-/)  # nodebrew
     /usr/local/cuda/bin(N-/)
@@ -93,7 +93,7 @@ setopt noclobber
 # # zstyle
 
 # 補完において
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'# 大文字小文字の区別をしない
+zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}'  # 大文字小文字の区別をしない
 zstyle ':completion:*:default' menu select=2  # 補完候補を矢印キーで移動できるように
 zstyle ':completion:*' use-cache true  # apt-getとかdpkgコマンドをキャッシュを使って速くする
 
@@ -129,8 +129,8 @@ zstyle ':vcs_info:*' formats "%c%u%b"  # $vcs_info_msg_0_ で実際に表示さ�
 zstyle ':vcs_info:*' actionformats "%b|%a"  # rebaseやmergeなど特殊状況下でformatsの代わりに表示される
 
 # %~: カレントディレクトリ(フルパス, home以下省略)
-DIR_PROMPT="%K{green}%F{016 } %~ %k%F{green}"
-BRANCH_PROMPT="%K{blue}%F{016} "'${vcs_info_msg_0_}'" %k%F{blue}"
+DIR_PROMPT="%K{green}%F{16} %~ %k%F{green}"
+BRANCH_PROMPT="%K{blue}%F{16} "'${vcs_info_msg_0_}'" %k%F{blue}"
 # %(A,B,C): if A then B else C
 # ?: 直前コマンドの返り値
 # !: rootユーザーかどうか
