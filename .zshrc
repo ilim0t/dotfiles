@@ -146,7 +146,7 @@ BRANCH_PROMPT="%K{blue}%F{16} "'${vcs_info_msg_0_}'" %k%F{blue}"
 MARK_PROMPT="%K{black}%(?,%F{white},%F{red}) %(!,#,$) %k%F{black}"
 END_PROMPT="%f"
 
-if [[ ${SSH_CONNECTION} ]] ; then
+if [ ${SSH_CONNECTION} ]; then
     export RPROMPT="%F{red}%K{red}%F{white} ${$(hostname)//.local/} "  # ${変数名//置換前文字列/置換後文字列} で置換
 fi
 
@@ -174,7 +174,9 @@ fi
 
 # direnv 読み込み
 # export EDITOR=vim  (意味がなさそうなのでコメントアウト 問題なければ削除)
-eval "$(direnv hook zsh)"
+if (( $+commands[direnv] )); then
+    eval "$(direnv hook zsh)"
+fi
 
 # iTerm2 shell_integration 読み込み (https://www.iterm2.com/documentation-shell-integration.html)
 if [ -e "$HOME/.iterm2_shell_integration.zsh" ]; then
@@ -182,7 +184,12 @@ if [ -e "$HOME/.iterm2_shell_integration.zsh" ]; then
 fi
 
 # cargo 読み込み
-source $HOME/.cargo/env
+if [ -e "$HOME/.cargo" ]; then
+    source $HOME/.cargo/env
+fi
+
+# poetry 設定
+export POETRY_VIRTUALENVS_IN_PROJECT=1
 
 # 文字コード指定
 # export LANG="ja_JP.UTF-8" (もともとされてたのでコメントアウト 問題なければ削除)
@@ -194,7 +201,7 @@ alias gitlog="git log --oneline --decorate --graph --branches --tags --remotes"
 alias lzd='lazydocker'  # 短縮
 
 # alias tb="tensorboard --logdir result --samples_per_plugin images=40"
-# alias brew="env PATH=${PATH//$(pyenv root)\/shims:/} brew"
+alias brew="env PATH=${PATH//$(pyenv root)\/shims:/} brew"
 
 case $OSTYPE in
     darwin*)
