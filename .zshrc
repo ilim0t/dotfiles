@@ -201,12 +201,15 @@ alias gitlog="git log --oneline --decorate --graph --branches --tags --remotes"
 alias lzd='lazydocker'  # 短縮
 
 # alias tb="tensorboard --logdir result --samples_per_plugin images=40"
-alias brew="env PATH=${PATH//$(pyenv root)\/shims:/} brew"
 
 case $OSTYPE in
     darwin*)
         # ls を色付きに
         alias ls="ls -G"
+
+        if (( $+commands[pyenv] )); then
+            alias brew="env PATH=${PATH//$(pyenv root)\/shims:/} brew"
+        fi
         ;;
     linux*)
         # ls を色付きに
