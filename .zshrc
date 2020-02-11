@@ -22,7 +22,7 @@ path=(
 
 export LD_LIBRARY_PATH=(
     /usr/local/cuda/lib64(N-/)
-    $LD_LIBRARY_PATH 
+    $LD_LIBRARY_PATH
 )
 
 
@@ -150,7 +150,7 @@ if [ ${SSH_CONNECTION} ]; then
     export RPROMPT="%F{red}%K{red}%F{white} ${$(hostname)//.local/} "  # ${変数名//置換前文字列/置換後文字列} で置換
 fi
 
-export PROMPT="${DIR_PROMPT}"'${BRANCH_PROMPT}'"${MARK_PROMPT}${END_PROMPT}" 
+export PROMPT="${DIR_PROMPT}"'${BRANCH_PROMPT}'"${MARK_PROMPT}${END_PROMPT}"
 
 # precmd はprompt表示毎に実行される関数
 # 他に用いないので add-zsh-hook を使うのではなく直接定義する
