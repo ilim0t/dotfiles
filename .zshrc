@@ -121,6 +121,8 @@ if zplug check "zsh-users/zsh-history-substring-search"; then
 fi
 
 export HISTFILE="$HOME/.zsh_history"
+export HISTSIZE=1000
+export SAVEHIST=100000
 
 
 # Prompt setting
