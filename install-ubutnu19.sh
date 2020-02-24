@@ -37,12 +37,10 @@ sudo apt install -y make build-essential libssl-dev zlib1g-dev libbz2-dev \
 curl https://pyenv.run | bash
 
 # pipenv
-sudo apt install -y python3-pip
-pip3 install --user pipenv
+sudo apt install -y pipenv virtualenv
 
 # pipx
-sudo apt install -y python3-venv
-pip3 install --user pipx
+sudo apt install -y pipx
 
 # tmux
 sudo apt install -y tmux
@@ -70,7 +68,7 @@ sudo apt-get install -y \
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 sudo add-apt-repository \
    "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-   $(lsb_release -cs) \
+   disco \
    stable"
 sudo apt-get update
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io
@@ -80,7 +78,7 @@ sudo gpasswd -a $USER docker
 sudo systemctl restart docker
 
 # docker-compose
-sudo curl -L "https://github.com/docker/compose/releases/download/1.25.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo curl -L "https://github.com/docker/compose/releases/download/1.25.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 
