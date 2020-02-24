@@ -108,6 +108,9 @@ zstyle ':completion:*' use-cache true  # apt-getとかdpkgコマンドをキャ�
 # export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
+# 何も入力してない際のTABの無効化
+zstyle ':completion:*' insert-tab false
+
 # zsh-users/zsh-autosuggestions の色
 # ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
 

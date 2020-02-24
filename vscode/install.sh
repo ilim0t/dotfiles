@@ -12,7 +12,6 @@ code --install-extension hbenl.vscode-test-explorer
 code --install-extension humao.rest-client
 code --install-extension James-Yu.latex-workshop
 code --install-extension jebbs.plantuml
-code --install-extension joffreykern.markdown-toc
 code --install-extension maddouri.cmake-tools-helper
 code --install-extension matepek.vscode-catch2-test-adapter
 code --install-extension mine.cpplint
@@ -26,11 +25,15 @@ code --install-extension ms-vscode-remote.remote-ssh-explorer
 code --install-extension ms-vscode-remote.vscode-remote-extensionpack
 code --install-extension ms-vscode.cmake-tools
 code --install-extension ms-vscode.cpptools
+code --install-extension ms-vscode.csharp
 code --install-extension ms-vsliveshare.vsliveshare
 code --install-extension p1c2u.docker-compose
 code --install-extension PKief.material-icon-theme
 code --install-extension Rubymaniac.vscode-direnv
+code --install-extension rust-lang.rust
+code --install-extension tht13.html-preview-vscode
 code --install-extension twxs.cmake
+code --install-extension vadimcn.vscode-lldb
 code --install-extension VisualStudioExptTeam.vscodeintellicode
 code --install-extension yzhang.markdown-all-in-one
 code --install-extension zhuangtongfa.material-theme
