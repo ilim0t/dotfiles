@@ -17,3 +17,7 @@ pipx install cpplint
 
 # Rust
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+# fonts
+sudo cp * /usr/local/share/fonts/
+sudo fc-cache -fv

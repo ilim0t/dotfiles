@@ -37,7 +37,7 @@ sudo apt install -y make build-essential libssl-dev zlib1g-dev libbz2-dev \
 curl https://pyenv.run | bash
 
 # pipenv
-sudo apt install -y pipenv virtualenv
+sudo apt install -y pipenv virtualenv python3-venv
 
 # pipx
 sudo apt install -y pipx
