@@ -168,6 +168,8 @@ precmd() {
     fi
 }
 
+# general
+export EDITOR=vim
 
 # pyenv
 if (( $+commands[pyenv] )); then
@@ -178,7 +180,6 @@ fi
 
 
 # direnv 読み込み
-# export EDITOR=vim  (意味がなさそうなのでコメントアウト 問題なければ削除)
 if (( $+commands[direnv] )); then
     eval "$(direnv hook zsh)"
 fi
