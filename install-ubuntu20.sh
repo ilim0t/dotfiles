@@ -66,6 +66,7 @@ sudo apt-get install -y \
     gnupg-agent \
     software-properties-common
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+# $(lsb_release -cs) → eoan
 sudo add-apt-repository \
    "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
    eoan \
@@ -92,6 +93,10 @@ sudo apt-get -y install cuda-10-1
 
 # cuDNN
 # https://developer.nvidia.com/rdp/cudnn-download に従い3つのdebをinstallする
+
+# nvtop
+apt download nvtop
+sudo dpkg -i --ignore-depends=libnvidia-compute-418  nvtop_*.deb
 
 # nvidia-docker2
 distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
