@@ -2,7 +2,6 @@
 set -u
 
 # git
-sudo add-apt-repository -y ppa:git-core/ppa
 sudo apt install -y git
 
 # Slack deb版でないと日本語入力ができないためコメントアウト
@@ -69,14 +68,10 @@ sudo apt-get install -y \
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 sudo add-apt-repository \
    "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-   $(lsb_release -cs) \
+   eoan \
    stable"
 sudo apt-get update
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io
-
-sudo groupadd docker
-sudo gpasswd -a $USER docker
-sudo systemctl restart docker
 
 # docker-compose
 sudo curl -L "https://github.com/docker/compose/releases/download/1.25.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
@@ -93,19 +88,10 @@ sudo mv cuda-ubuntu1804.pin /etc/apt/preferences.d/cuda-repository-pin-600
 sudo apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/7fa2af80.pub
 sudo add-apt-repository "deb http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/ /"
 sudo apt-get update
-sudo apt-get -y install cuda
+sudo apt-get -y install cuda-10-1
 
 # cuDNN
 # https://developer.nvidia.com/rdp/cudnn-download に従い3つのdebをinstallする
-
-# nvtop
-git clone https://github.com/Syllo/nvtop.git
-mkdir -p nvtop/build && cd nvtop/build
-cmake ..
-sudo make install
-
-cd ../../
-rm -rf nvtop
 
 # nvidia-docker2
 distribution=$(. /etc/os-release;echo $ID$VERSION_ID)

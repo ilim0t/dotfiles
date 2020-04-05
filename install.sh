@@ -26,6 +26,7 @@ sudo apt install fzy
 sudo apt install -y vim curl
 curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
 sh ./installer.sh ~/.cache/dein
+rm ./installer.sh
 
 # direnv
 sudo apt install -y direnv
