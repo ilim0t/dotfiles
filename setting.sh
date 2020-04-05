@@ -21,5 +21,8 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 sudo cp * /usr/local/share/fonts/
 sudo fc-cache -fv
 
-#timestamp
+# timestamp
 timedatectl set-local-rtc 1
+
+# keymap
+gsettings set org.gnome.desktop.input-sources xkb-options "['ctrl:nocaps']"
