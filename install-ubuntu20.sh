@@ -6,8 +6,11 @@ sudo apt install -y git
 
 # Slack deb版でないと日本語入力ができないためコメントアウト
 # sudo snap install slack --classic
-# VSCode
-sudo snap install code --classic
+
+# VSCode deb版でないと日本語入力ができないためコメントアウト(?)
+# sudo snap install code --classic
+
+# Chrome
 
 sudo apt update
 
