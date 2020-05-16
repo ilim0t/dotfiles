@@ -223,6 +223,9 @@ case $OSTYPE in
 
         # OS間の互換性のため
         alias open="xdg-open"
+
+        # Linuxbrew   
+        eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
         ;;
 esac
 

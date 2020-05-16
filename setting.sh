@@ -26,3 +26,9 @@ timedatectl set-local-rtc 1
 
 # keymap
 gsettings set org.gnome.desktop.input-sources xkb-options "['ctrl:nocaps']"
+
+# anyconnect
+# 自分で
+
+# SSH-server
+sudo apt install -y openssh-server

@@ -12,7 +12,7 @@ sudo snap install code --classic
 sudo apt update
 
 # general
-sudo apt -y install htop cmake
+sudo apt -y install cmake
 
 # zsh
 sudo apt -y install zsh git gawk curl
@@ -46,6 +46,9 @@ sudo apt install -y pipx
 sudo apt install -y tmux
 # tmux source ~/.tmux.conf
 
+# Linux brew
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+
 # trash-cli
 sudo apt -y install trash-cli
 
@@ -58,6 +61,15 @@ sudo apt purge -y nodejs npm
 # tig
 sudo apt install -y tig
 
+# ngrok
+sudo snap install htop
+sudo snap install discord
+sudo snap install libreoffice
+sudo snap install ngrok
+sudo snap install tor
+sudo snap install vlc
+sudo snap install youtube-dl
+
 # Docker
 sudo apt-get install -y \
     apt-transport-https \
@@ -69,10 +81,18 @@ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 # $(lsb_release -cs) → eoan
 sudo add-apt-repository \
    "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-   eoan \
+   $(lsb_release -cs)  \
    stable"
 sudo apt-get update
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io
+
+# 上記または以下のコメントアウト部
+# sudo apt install -y docker.io
+# sudo systemctl enable --now docker
+
+sudo groupadd docker
+sudo gpasswd -a $USER docker
+sudo systemctl restart docker
 
 # docker-compose
 sudo curl -L "https://github.com/docker/compose/releases/download/1.25.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
@@ -91,12 +111,20 @@ sudo add-apt-repository "deb http://developer.download.nvidia.com/compute/cuda/r
 sudo apt-get update
 sudo apt-get -y install cuda-10-1
 
+# 上記または以下のコメントアウト部
+# sudo apt install -y nvidia-cuda-toolkit
+
 # cuDNN
 # https://developer.nvidia.com/rdp/cudnn-download に従い3つのdebをinstallする
 
 # nvtop
-apt download nvtop
-sudo dpkg -i --ignore-depends=libnvidia-compute-418  nvtop_*.deb
+git clone https://github.com/Syllo/nvtop.git
+mkdir -p nvtop/build && cd nvtop/build
+cmake ..
+sudo make install
+
+cd ../../
+rm -rf nvtop
 
 # nvidia-docker2
 distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
@@ -108,3 +136,6 @@ sudo systemctl restart docker
 
 # xsel
 sudo apt install -y xclip
+
+# aria
+sudo apt install -y aria2
