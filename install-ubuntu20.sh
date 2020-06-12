@@ -114,9 +114,6 @@ sudo add-apt-repository "deb http://developer.download.nvidia.com/compute/cuda/r
 sudo apt-get update
 sudo apt-get -y install cuda-10-1
 
-# 上記または以下のコメントアウト部
-# sudo apt install -y nvidia-cuda-toolkit
-
 # cuDNN
 # https://developer.nvidia.com/rdp/cudnn-download に従い3つのdebをinstallする
 
