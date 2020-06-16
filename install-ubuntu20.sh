@@ -1,116 +1,39 @@
 #!/bin/bash
 set -u
 
-# git
-sudo apt install -y git
-
-# Slack deb版でないと日本語入力ができないためコメントアウト
-# sudo snap install slack --classic
-
-# VSCode deb版でないと日本語入力ができないためコメントアウト(?)
-# sudo snap install code --classic
-
-# Chrome
-
 sudo apt update
 
-# general
-sudo apt -y install cmake
 
-# zsh
-sudo apt -y install zsh git gawk curl
-curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
-chsh -s $(which zsh)
+# General
+sudo apt -y install cmake curl git
 
-sudo apt install fzy
-
-# vim
-sudo apt install -y vim curl
-curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
-sh ./installer.sh ~/.cache/dein
-rm ./installer.sh
-
-# direnv
-sudo apt install -y direnv
-
-# pyenv
-sudo apt install -y make build-essential libssl-dev zlib1g-dev libbz2-dev \
-    libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev \
-    xz-utils tk-dev libffi-dev liblzma-dev python-openssl git
-curl https://pyenv.run | bash
-
-# pipenv
-sudo apt install -y pipenv virtualenv python3-venv
-
-# pipx
-sudo apt install -y pipx
-
-# tmux
-sudo apt install -y tmux
-# tmux source ~/.tmux.conf
-
-# Linux brew
+# Homebrew on Linux
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 brew tap beeftornado/rmtree
 
-# trash-cli
-sudo apt -y install trash-cli
 
-# nodejs
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
+# Application
+# Chrome https://www.google.com/chrome/
 
-# Yarn
-curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-sudo apt update && sudo apt install -y yarn --no-install-recommends yarn
+# Slack https://slack.com/intl/ja-jp/downloads/linux
+# deb版でないと日本語入力ができないためコメントアウト
+# sudo snap install slack --classic
 
-# Rust
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+# Visual Studio Code https://code.visualstudio.com/download
+# deb版でないと日本語入力ができないためコメントアウト(未確証)
+# sudo snap install code --classic
 
-# tig
-sudo apt install -y tig
-
-# ngrok
+# Snap
 sudo snap install htop
 sudo snap install discord
-sudo snap install libreoffice
+# sudo snap install libreoffice
 sudo snap install ngrok
-sudo snap install tor
-sudo snap install vlc
-sudo snap install youtube-dl
+# sudo snap install tor
+# sudo snap install vlc
+# sudo snap install youtube-dl
 
-# Docker
-sudo apt-get install -y \
-    apt-transport-https \
-    ca-certificates \
-    curl \
-    gnupg-agent \
-    software-properties-common
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-# $(lsb_release -cs) → eoan
-sudo add-apt-repository \
-   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-   $(lsb_release -cs)  \
-   stable"
-sudo apt-get update
-sudo apt-get install -y docker-ce docker-ce-cli containerd.io
 
-# 上記または以下のコメントアウト部
-# sudo apt install -y docker.io
-# sudo systemctl enable --now docker
-
-sudo groupadd docker
-sudo gpasswd -a $USER docker
-sudo systemctl restart docker
-
-# docker-compose
-sudo curl -L "https://github.com/docker/compose/releases/download/1.25.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-sudo chmod +x /usr/local/bin/docker-compose
-sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
-
-# Lazy Docker
-curl https://raw.githubusercontent.com/jesseduffield/lazydocker/master/scripts/install_update_linux.sh | bash
-
+# Driver
 # CUDA
 # https://developer.nvidia.com/cuda-downloads に従う
 wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-ubuntu1804.pin
@@ -123,14 +46,33 @@ sudo apt-get -y install cuda-10-1
 # cuDNN
 # https://developer.nvidia.com/rdp/cudnn-download に従い3つのdebをinstallする
 
-# nvtop
-git clone https://github.com/Syllo/nvtop.git
-mkdir -p nvtop/build && cd nvtop/build
-cmake ..
-sudo make install
 
-cd ../../
-rm -rf nvtop
+# Docker
+sudo apt-get install -y \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg-agent \
+    software-properties-common
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs)  \
+   stable"
+sudo apt-get update
+sudo apt-get install -y docker-ce docker-ce-cli containerd.io
+
+# sudo apt install -y docker.io
+# sudo systemctl enable --now docker
+
+sudo groupadd docker
+sudo gpasswd -a $USER docker
+sudo systemctl restart docker
+
+# docker-compose
+sudo curl -L "https://github.com/docker/compose/releases/download/1.25.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 
 # nvidia-docker2
 distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
@@ -140,10 +82,71 @@ curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.li
 sudo apt-get update && sudo apt-get install -y nvidia-container-toolkit nvidia-docker2
 sudo systemctl restart docker
 
-# xsel
-sudo apt install -y xclip
 
-# aria
+# CLI
+# zsh
+sudo apt -y install zsh gawk
+curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+chsh -s $(which zsh)
+
+sudo apt install fzy
+
+# Vim
+sudo apt install -y vim
+curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
+sh ./installer.sh ~/.cache/dein
+rm ./installer.sh
+
+# tmux
+sudo apt install -y tmux
+# tmux source ~/.tmux.conf
+
+# tig
+sudo apt install -y tig
+
+# lazydocker
+curl https://raw.githubusercontent.com/jesseduffield/lazydocker/master/scripts/install_update_linux.sh | bash
+
+# nvtop
+git clone https://github.com/Syllo/nvtop.git
+mkdir -p nvtop/build && cd nvtop/build
+cmake ..
+sudo make install
+
+cd ../../
+rm -rf nvtop
+
+
+# Progmamming language manager
+# Python
+# pyenv
+sudo apt install -y make build-essential libssl-dev zlib1g-dev libbz2-dev \
+    libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev \
+    xz-utils tk-dev libffi-dev liblzma-dev python-openssl git
+curl https://pyenv.run | bash
+
+# Pipenv
+sudo apt install -y pipenv virtualenv python3-venv
+
+# pipx
+sudo apt install -y pipx
+
+# Node.js
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
+
+# Yarn
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+sudo apt update && sudo apt install -y yarn --no-install-recommends yarn
+
+# Rust
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+
+# Utility
+sudo apt install -y direnv
+sudo apt install -y trash-cli
+sudo apt install -y xclip
 sudo apt install -y aria2
 
 
