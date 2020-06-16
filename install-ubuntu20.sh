@@ -51,15 +51,21 @@ sudo apt install -y tmux
 
 # Linux brew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+brew tap beeftornado/rmtree
 
 # trash-cli
 sudo apt -y install trash-cli
 
 # nodejs
-sudo apt install -y nodejs npm
-sudo npm install -g n
-sudo n stable
-sudo apt purge -y nodejs npm
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
+
+# Yarn
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+sudo apt update && sudo apt install -y yarn --no-install-recommends yarn
+
+# Rust
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 # tig
 sudo apt install -y tig
@@ -139,3 +145,13 @@ sudo apt install -y xclip
 
 # aria
 sudo apt install -y aria2
+
+
+# Font
+brew tap sanemat/font
+brew install ricty --with-powerline
+cp -f /home/linuxbrew/.linuxbrew/opt/ricty/share/fonts/Ricty*.ttf ~/Library/Fonts/
+
+sudo apt install fonts-firacode
+
+fc-cache -vf

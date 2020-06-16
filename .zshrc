@@ -194,6 +194,11 @@ if [ -e "$HOME/.cargo" ]; then
     source $HOME/.cargo/env
 fi
 
+# nvm 読み込み
+if [ -e "$HOME/.nvm/nvm.sh" ]; then
+    source "$HOME/.nvm/nvm.sh"
+fi
+
 # poetry 設定
 export POETRY_VIRTUALENVS_IN_PROJECT=1
 
