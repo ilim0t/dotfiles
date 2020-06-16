@@ -19,8 +19,8 @@ nvm install-latest-npm
 pipx install cpplint
 
 # fonts
-sudo cp * /usr/local/share/fonts/
-sudo fc-cache -fv
+# sudo cp * /usr/local/share/fonts/
+# sudo fc-cache -fv
 
 # timestamp
 timedatectl set-local-rtc 1
@@ -30,6 +30,3 @@ gsettings set org.gnome.desktop.input-sources xkb-options "['ctrl:nocaps']"
 
 # anyconnect
 # 自分で
-
-# SSH-server
-sudo apt install -y openssh-server

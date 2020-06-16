@@ -5,12 +5,13 @@ sudo apt update
 
 
 # General
-sudo apt -y install cmake curl git
+sudo apt install -y cmake curl git
 
 # Homebrew on Linux
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 brew tap beeftornado/rmtree
 
+sudo apt install -y openssh-server
 
 # Application
 # Chrome https://www.google.com/chrome/
@@ -31,6 +32,7 @@ sudo snap install ngrok
 # sudo snap install tor
 # sudo snap install vlc
 # sudo snap install youtube-dl
+sudo snap install zoom-client
 
 
 # Driver
@@ -41,7 +43,7 @@ sudo mv cuda-ubuntu1804.pin /etc/apt/preferences.d/cuda-repository-pin-600
 sudo apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/7fa2af80.pub
 sudo add-apt-repository "deb http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/ /"
 sudo apt-get update
-sudo apt-get -y install cuda-10-1
+sudo apt-get -y install cuda-10-2
 
 # cuDNN
 # https://developer.nvidia.com/rdp/cudnn-download に従い3つのdebをinstallする
@@ -85,7 +87,7 @@ sudo systemctl restart docker
 
 # CLI
 # zsh
-sudo apt -y install zsh gawk
+sudo apt install -y zsh gawk
 curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
 chsh -s $(which zsh)
 
