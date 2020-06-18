@@ -13,8 +13,8 @@ fi
 # 環境変数の設定
 path=(
     $HOME/.local/bin(N-/)  # added by pipx (https://github.com/pipxproject/pipx)
-    # /usr/local/sbin(N-/)  # brew doctor より
     $HOME/.pyenv/bin(N-/)  # pyenv installer より
+    /usr/local/sbin(N-/)  # brew doctor より
     # /usr/local/cuda/bin(N-/)
     $path
 )
