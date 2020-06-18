@@ -13,15 +13,14 @@ fi
 # 環境変数の設定
 path=(
     $HOME/.local/bin(N-/)  # added by pipx (https://github.com/pipxproject/pipx)
-    /usr/local/sbin(N-/)  # brew doctor より
+    # /usr/local/sbin(N-/)  # brew doctor より
     $HOME/.pyenv/bin(N-/)  # pyenv installer より
-    $HOME/.nodebrew/current/bin(N-/)  # nodebrew
-    /usr/local/cuda/bin(N-/)
+    # /usr/local/cuda/bin(N-/)
     $path
 )
 
 export LD_LIBRARY_PATH=(
-    /usr/local/cuda/lib64(N-/)
+    # /usr/local/cuda/lib64(N-/)
     $LD_LIBRARY_PATH
 )
 
@@ -211,16 +210,16 @@ alias tree="tree -N"  # 日本語を文字化けせずに表示するため
 alias gitlog="git log --oneline --decorate --graph --branches --tags --remotes"
 alias lzd='lazydocker'  # 短縮
 
+if (( $+commands[pyenv] )); then
+    alias brew="env PATH=${PATH//$(pyenv root)\/shims:/} brew"
+fi
+
 # alias tb="tensorboard --logdir result --samples_per_plugin images=40"
 
 case $OSTYPE in
     darwin*)
         # ls を色付きに
         alias ls="ls -G"
-
-        if (( $+commands[pyenv] )); then
-            alias brew="env PATH=${PATH//$(pyenv root)\/shims:/} brew"
-        fi
         ;;
     linux*)
         # ls を色付きに
