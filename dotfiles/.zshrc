@@ -211,7 +211,7 @@ alias gitlog="git log --oneline --decorate --graph --branches --tags --remotes"
 alias lzd='lazydocker'  # 短縮
 
 if (( $+commands[pyenv] )); then
-    alias brew="env PATH=${PATH//$(pyenv root)\/shims:/} brew"
+    alias brew='env PATH=${PATH//$(pyenv root)\/shims/} brew'
 fi
 
 # alias tb="tensorboard --logdir result --samples_per_plugin images=40"

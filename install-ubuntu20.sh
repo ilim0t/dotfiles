@@ -17,12 +17,15 @@ sudo apt install -y openssh-server
 # Chrome https://www.google.com/chrome/
 
 # Slack https://slack.com/intl/ja-jp/downloads/linux
-# deb版でないと日本語入力ができないためコメントアウト
+# deb版でないと日本語入力ができない
 # sudo snap install slack --classic
 
 # Visual Studio Code https://code.visualstudio.com/download
-# deb版でないと日本語入力ができないためコメントアウト(未確証)
+# deb版でないと日本語入力ができない
 # sudo snap install code --classic
+
+# Zoom https://zoom.us/download?os=linux
+# deb版でないとURLでxdg-openされない
 
 # Snap
 sudo snap install htop
@@ -32,7 +35,7 @@ sudo snap install ngrok
 # sudo snap install tor
 # sudo snap install vlc
 # sudo snap install youtube-dl
-sudo snap install zoom-client
+# sudo snap install zoom-client
 
 
 # Driver
@@ -67,7 +70,7 @@ sudo apt-get install -y docker-ce docker-ce-cli containerd.io
 # sudo apt install -y docker.io
 # sudo systemctl enable --now docker
 
-sudo groupadd docker
+# sudo groupadd docker  # 問題なければこのまま削除
 sudo gpasswd -a $USER docker
 sudo systemctl restart docker
 
@@ -89,7 +92,7 @@ sudo systemctl restart docker
 # zsh
 sudo apt install -y zsh gawk
 curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
-chsh -s $(which zsh)
+sudo chsh -s $(which zsh)
 
 sudo apt install fzy
 
@@ -128,7 +131,7 @@ sudo apt install -y make build-essential libssl-dev zlib1g-dev libbz2-dev \
 curl https://pyenv.run | bash
 
 # Pipenv
-sudo apt install -y pipenv virtualenv python3-venv
+sudo apt install -y pipenv python3-venv # virtualenv 問題なければvirtualenvを実際に削除予定
 
 # pipx
 sudo apt install -y pipx

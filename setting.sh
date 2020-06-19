@@ -2,6 +2,7 @@
 set -u
 
 # home directory
+# sudo apt-get install xdg-user-dirs-gtk
 LANG=C xdg-user-dirs-gtk-update
 
 # git
