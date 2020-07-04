@@ -12,6 +12,7 @@ fi
 
 # 環境変数の設定
 path=(
+    /snap/bin(N-/)  # snap run
     $HOME/.local/bin(N-/)  # added by pipx (https://github.com/pipxproject/pipx)
     $HOME/.pyenv/bin(N-/)  # pyenv installer より
     /usr/local/sbin(N-/)  # brew doctor より
