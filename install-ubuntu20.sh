@@ -145,7 +145,7 @@ echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/source
 sudo apt update && sudo apt install -y yarn --no-install-recommends yarn
 
 # Rust
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 
 
 # Utility
@@ -158,7 +158,7 @@ sudo apt install -y aria2
 # Font
 brew tap sanemat/font
 brew install ricty --with-powerline
-cp -f /home/linuxbrew/.linuxbrew/opt/ricty/share/fonts/Ricty*.ttf ~/Library/Fonts/
+cp -f /home/linuxbrew/.linuxbrew/opt/ricty/share/fonts/Ricty*.ttf /usr/local/share/fonts/
 
 sudo apt install fonts-firacode
 
