@@ -230,7 +230,9 @@ case $OSTYPE in
         alias open="xdg-open"
 
         # Linuxbrew   
-        eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+        if [ -d "/home/linuxbrew/.linuxbrew" ]; then
+            eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+        fi
         ;;
 esac
 
