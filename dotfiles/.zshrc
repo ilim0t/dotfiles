@@ -36,6 +36,9 @@ zplug "zsh-users/zsh-completions"  # 補完される辞書の追加
 zplug "zsh-users/zsh-history-substring-search"  # 途中まで打ったコマンドの続きを履歴から検索 (^P, ^N に設定した)
 zplug "zsh-users/zsh-syntax-highlighting", defer:2  # https://github.com/zsh-users/zsh-syntax-highlighting
 zplug "b4b4r07/enhancd", use:init.sh  # cdコマンドでインタラクティブにあいまい検索  fzy等のinstallが必要
+zplug "mrowa44/emojify", as:command, rename-to:emojify  # :tada: 等を絵文字にデコードするコマンドの追加
+zplug "stedolan/jq", from:gh-r, as:command, rename-to:jq  # emojifyの依存
+zplug "b4b4r07/emoji-cli", on:"stedolan/jq", defer:2  # 絵文字を入力する機能の追加
 zplug "plugins/docker-compose", from:oh-my-zsh
 zplug "plugins/docker", from:oh-my-zsh
 zplug "plugins/extract", from:oh-my-zsh
@@ -117,6 +120,7 @@ zstyle ':completion:*' insert-tab false
 # Keyboard shotcut settings
 bindkey "^A" vi-beginning-of-line
 bindkey "^E" vi-end-of-line
+export EMOJI_CLI_KEYBIND="^x"
 
 if zplug check "zsh-users/zsh-history-substring-search"; then
     bindkey '^P' history-substring-search-up
@@ -196,7 +200,12 @@ fi
 
 # nvm 読み込み
 if [ -e "$HOME/.nvm/nvm.sh" ]; then
-    source "$HOME/.nvm/nvm.sh"
+    # nvm コマンドを上書き
+    function nvm() {
+        unfunction "$0" # 個のnvm関数定義を解除、以降本来のnvm関数へ
+        source "$HOME/.nvm/nvm.sh"
+        $0 "$@"  # nvm **args を実行
+    }
 fi
 
 # poetry 設定
@@ -208,7 +217,7 @@ export POETRY_VIRTUALENVS_IN_PROJECT=1
 
 # alias
 alias tree="tree -N"  # 日本語を文字化けせずに表示するため
-alias gitlog="git log --oneline --decorate --graph --branches --tags --remotes"
+alias gitlog="git log --oneline --decorate --graph --branches --tags --remotes --color | emojify | less -rX"
 alias lzd='lazydocker'  # 短縮
 
 if (( $+commands[pyenv] )); then
