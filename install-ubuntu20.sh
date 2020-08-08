@@ -8,7 +8,8 @@ sudo apt update
 sudo apt install -y cmake curl git
 
 # Homebrew on Linux
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh | bash -s -- -y
+export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
 brew tap beeftornado/rmtree
 
 sudo apt install -y openssh-server
@@ -41,7 +42,7 @@ sudo snap install discord
 sudo snap install ngrok
 # sudo snap install tor
 # sudo snap install vlc
-# sudo snap install youtube-dl
+sudo snap install youtube-dl
 # sudo snap install zoom-client
 
 
@@ -82,7 +83,7 @@ sudo gpasswd -a $USER docker
 sudo systemctl restart docker
 
 # docker-compose
-sudo curl -L "https://github.com/docker/compose/releases/download/1.25.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo curl -L "https://github.com/docker/compose/releases/download/1.26.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 
@@ -105,9 +106,7 @@ sudo apt install fzy
 
 # Vim
 sudo apt install -y vim
-curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
-sh ./installer.sh ~/.cache/dein
-rm ./installer.sh
+curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh | sh -s -- ~/.cache/dein
 
 # tmux
 sudo apt install -y tmux
@@ -138,7 +137,7 @@ sudo apt install -y make build-essential libssl-dev zlib1g-dev libbz2-dev \
 curl https://pyenv.run | bash
 
 # Pipenv
-sudo apt install -y pipenv python3-venv # virtualenv 問題なければvirtualenvを実際に削除予定
+sudo apt install -y pipenv python3-venv  # virtualenv 問題なければvirtualenvを実際に削除予定
 
 # pipx
 sudo apt install -y pipx
@@ -149,7 +148,7 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
 # Yarn
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-sudo apt update && sudo apt install -y yarn --no-install-recommends yarn
+sudo apt update && sudo apt install -y --no-install-recommends yarn
 
 # Rust
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
@@ -165,7 +164,7 @@ sudo apt install -y aria2
 # Font
 brew tap sanemat/font
 brew install ricty --with-powerline
-cp -f /home/linuxbrew/.linuxbrew/opt/ricty/share/fonts/Ricty*.ttf /usr/local/share/fonts/
+sudo cp -f /home/linuxbrew/.linuxbrew/opt/ricty/share/fonts/Ricty*.ttf /usr/local/share/fonts/
 
 sudo apt install fonts-firacode
 

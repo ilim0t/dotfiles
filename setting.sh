@@ -2,15 +2,16 @@
 set -u
 
 # home directory
-# sudo apt-get install xdg-user-dirs-gtk
+sudo apt-get install xdg-user-dirs-gtk
 LANG=C xdg-user-dirs-gtk-update
+sudo apt-get purge xdg-user-dirs-gtk
 
 # git
 git config --global user.email "ilim0t14@gmail.com"
 git config --global user.name "ilim"
 
 # pyenv
-pyenv install 3.8.3
+pyenv install 3.8.5
 
 #nvm
 nvm install --lts
