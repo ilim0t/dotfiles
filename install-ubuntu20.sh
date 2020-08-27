@@ -100,7 +100,7 @@ sudo systemctl restart docker
 # zsh
 sudo apt install -y zsh gawk
 curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
-sudo chsh -s $(which zsh)
+sudo chsh -s $(which zsh) $USER
 
 sudo apt install fzy
 

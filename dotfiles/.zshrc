@@ -25,6 +25,11 @@ LD_LIBRARY_PATH=(
     $LD_LIBRARY_PATH
 )
 
+# Linuxbrew   
+if [ -d "/home/linuxbrew/.linuxbrew" ]; then
+    eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+fi
+
 
 # zplugの読み込み
 source $HOME/.zplug/init.zsh
@@ -238,10 +243,6 @@ case $OSTYPE in
         # OS間の互換性のため
         alias open="xdg-open"
 
-        # Linuxbrew   
-        if [ -d "/home/linuxbrew/.linuxbrew" ]; then
-            eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
-        fi
         ;;
 esac
 
