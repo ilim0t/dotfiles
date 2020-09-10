@@ -20,10 +20,15 @@ path=(
     $path
 )
 
-export LD_LIBRARY_PATH=(
+LD_LIBRARY_PATH=(
     # /usr/local/cuda/lib64(N-/)
     $LD_LIBRARY_PATH
 )
+
+# Linuxbrew   
+if [ -d "/home/linuxbrew/.linuxbrew" ]; then
+    eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+fi
 
 
 # zplugの読み込み
@@ -238,10 +243,6 @@ case $OSTYPE in
         # OS間の互換性のため
         alias open="xdg-open"
 
-        # Linuxbrew   
-        if [ -d "/home/linuxbrew/.linuxbrew" ]; then
-            eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
-        fi
         ;;
 esac
 

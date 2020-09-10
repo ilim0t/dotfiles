@@ -100,7 +100,7 @@ sudo systemctl restart docker
 # zsh
 sudo apt install -y zsh gawk
 curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
-sudo chsh -s $(which zsh)
+sudo chsh -s $(which zsh) $USER
 
 sudo apt install fzy
 
@@ -116,7 +116,7 @@ sudo apt install -y tmux
 sudo apt install -y tig
 
 # lazydocker
-curl https://raw.githubusercontent.com/jesseduffield/lazydocker/master/scripts/install_update_linux.sh | bash
+brew install jesseduffield/lazydocker/lazydocker
 
 # nvtop
 git clone https://github.com/Syllo/nvtop.git
@@ -131,10 +131,7 @@ rm -rf nvtop
 # Progmamming language manager
 # Python
 # pyenv
-sudo apt install -y make build-essential libssl-dev zlib1g-dev libbz2-dev \
-    libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev \
-    xz-utils tk-dev libffi-dev liblzma-dev python-openssl git
-curl https://pyenv.run | bash
+brew install pyenv
 
 # Pipenv
 sudo apt install -y pipenv python3-venv  # virtualenv 問題なければvirtualenvを実際に削除予定
@@ -146,9 +143,7 @@ sudo apt install -y pipx
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
 
 # Yarn
-curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-sudo apt update && sudo apt install -y --no-install-recommends yarn
+sudo apt install -y yarn
 
 # Rust
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
