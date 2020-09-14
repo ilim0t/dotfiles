@@ -37,7 +37,7 @@ sudo apt install -y openssh-server
 
 # Snap
 sudo snap install htop
-sudo snap install discord
+# sudo snap install discord
 # sudo snap install libreoffice
 sudo snap install ngrok
 # sudo snap install tor
@@ -80,10 +80,9 @@ sudo apt-get install -y docker-ce docker-ce-cli containerd.io
 
 # sudo groupadd docker  # 問題なければこのまま削除
 sudo gpasswd -a $USER docker
-sudo systemctl restart docker
 
 # docker-compose
-sudo curl -L "https://github.com/docker/compose/releases/download/1.26.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo curl -L "https://github.com/docker/compose/releases/download/1.27.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 
@@ -159,8 +158,6 @@ sudo apt install -y xclip
 sudo apt install -y aria2
 brew install ncdu
 brew install glances
-brew install tor
-
 
 
 # Font

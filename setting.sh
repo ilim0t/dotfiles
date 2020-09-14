@@ -36,3 +36,12 @@ gsettings set org.gnome.desktop.input-sources xkb-options "['ctrl:nocaps']"
 
 # anyconnect
 # 自分で
+
+# Swapfile
+sudo swapoff /swapfile
+sudo fallocate -l 4G /swapfile
+sudo mkswap /swapfile
+sudo swapon /swapfile
+
+# Auto mount
+# 自分で

@@ -16,6 +16,7 @@ path=(
     $HOME/.local/bin(N-/)  # added by pipx (https://github.com/pipxproject/pipx)
     $HOME/.pyenv/bin(N-/)  # pyenv installer より
     /usr/local/sbin(N-/)  # brew doctor より
+    $HOME/.nvm/versions/node/v12.18.3/bin/npx(N-/)
     # /usr/local/cuda/bin(N-/)
     $path
 )

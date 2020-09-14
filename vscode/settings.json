@@ -13,14 +13,19 @@
   "workbench.iconTheme": "material-icon-theme",
   "workbench.colorTheme": "One Dark Pro",
   "editor.minimap.renderCharacters": false,
+  // "editor.minimap.maxColumn": 80,
 
   "files.autoSave": "afterDelay",
   "editor.formatOnType": true,
 
   "git.autofetch": true,
 
-  "editor.suggestSelection": "first",  // 自動追加
+  "editor.suggestSelection": "first", // 自動追加
   "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue", // 自動追加
+
+  "files.watcherExclude": {
+    "**/.venv/**": true
+  },
 
   // LaTeX Settings
   "latex-workshop.latex.recipes": [
@@ -64,24 +69,20 @@
 
   // Python setting
   "python.languageServer": "Pylance",
-  // "python.languageServer": "Microsoft",
-  "python.analysis.typeCheckingMode": "basic",
+  "python.analysis.typeCheckingMode": "basic", // Pylance 型チェック
 
   "python.venvPath": ".venv",
   "python.pythonPath": ".venv/bin/python",
 
   "python.formatting.provider": "autopep8",
-  "python.formatting.autopep8Args": ["--max-line-length 120"],
-  // "python.formatting.blackPath": "~/.local/bin/black",
+  "python.formatting.autopep8Args": ["--max-line-length=120"],
 
   "python.linting.pylintEnabled": false,
 
   "python.linting.flake8Enabled": true,
-  // "python.linting.flake8Path": "~/.local/bin/flake8",
   "python.linting.flake8Args": ["--ignore=E501"],
 
   "python.linting.mypyEnabled": true,
-  // "python.linting.mypyPath": "~/.local/bin/mypy",
 
   // JavaScript Settings
   "editor.codeActionsOnSave": {
@@ -89,7 +90,10 @@
   },
   "eslint.workingDirectories": [{ "mode": "auto" }],
   "[javascript]": {
-    "editor.defaultFormatter": "vscode.typescript-language-features"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[jsonc]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -97,36 +101,24 @@
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-
-  // C/C++ Settings
-  "C_Cpp.clang_format_fallbackStyle": "Google", // 仮
   // "cpplint.cpplintPath": "~/.local/bin/cpplint", // 仮
-
+  "C_Cpp.clang_format_fallbackStyle": "Chromium",
   "cmake.configureOnOpen": true,
-  "cmake.debugConfig": {
-    "stopAtEntry": false,
-    "MIMode": "lldb",
-    "miDebuggerPath": "/usr/bin/lldb", // 絶対パスでないとエラー
-    "logging": {
-      "trace": false,
-      "engineLogging": false,
-      "traceResponse": false
-    }
-  },
+  // "cmake.debugConfig": {
+  //   "stopAtEntry": false,
+  //   "MIMode": "lldb",
+  //   "miDebuggerPath": "/usr/bin/lldb", // 絶対パスでないとエラー
+  //   "logging": {
+  //     "trace": false,
+  //     "engineLogging": false,
+  //     "traceResponse": false
+  //   }
+  // },
 
   // Others Language Settings
-  "[html]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[markdown]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[dockerfile]": {
-    "editor.defaultFormatter": "ms-azuretools.vscode-docker"
-  },
-  "files.associations": {
-    "*.json": "jsonc"
-  },
+  // "files.associations": {
+  //   "*.json": "jsonc"
+  // },
 
   // Uncategorized Setteings
   "meaningless": "VSCodeが自動で追記する際，最終行に書かれるようする"
