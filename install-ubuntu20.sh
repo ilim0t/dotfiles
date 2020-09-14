@@ -143,7 +143,10 @@ sudo apt install -y pipx
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
 
 # Yarn
-sudo apt install -y yarn
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+sudo apt update
+sudo apt install --no-install-recommends yarn
 
 # Rust
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
@@ -154,6 +157,10 @@ sudo apt install -y direnv
 sudo apt install -y trash-cli
 sudo apt install -y xclip
 sudo apt install -y aria2
+brew install ncdu
+brew install glances
+brew install tor
+
 
 
 # Font

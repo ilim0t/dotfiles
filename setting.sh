@@ -10,6 +10,10 @@ sudo apt-get purge xdg-user-dirs-gtk
 git config --global user.email "ilim0t14@gmail.com"
 git config --global user.name "ilim"
 
+git config --global commit.gpgsign true
+git config --global tag.gpgSign true
+git config --global user.signingkey 404D725FE3C50AE0
+
 # pyenv
 pyenv install 3.8.5
 
