@@ -120,7 +120,9 @@ brew install jesseduffield/lazydocker/lazydocker
 # nvtop
 git clone https://github.com/Syllo/nvtop.git
 mkdir -p nvtop/build && cd nvtop/build
+sudo apt instal -y libncurses5-dev
 cmake ..
+sudo apt purge -y libncurses5-dev
 sudo make install
 
 cd ../../
@@ -158,7 +160,7 @@ sudo apt install -y xclip
 sudo apt install -y aria2
 brew install ncdu
 brew install glances
-
+snap install ksuperkey
 
 # Font
 brew tap sanemat/font
