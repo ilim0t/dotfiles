@@ -15,7 +15,7 @@ path=(
     /snap/bin(N-/)  # snap run
     $HOME/.local/bin(N-/)  # added by pipx (https://github.com/pipxproject/pipx)
     $HOME/.pyenv/bin(N-/)  # pyenv installer より
-    /usr/local/sbin(N-/)  # brew doctor より
+    /usr/local/sbin(N-/)  # brew doctor (macOS) より
     $HOME/.nvm/versions/node/v12.18.3/bin(N-/)
     # /usr/local/cuda/bin(N-/)
     $path
@@ -223,7 +223,11 @@ export POETRY_VIRTUALENVS_IN_PROJECT=1
 
 # alias
 alias tree="tree -N"  # 日本語を文字化けせずに表示するため
-alias gitlog="git log --oneline --decorate --graph --branches --tags --remotes --color | emojify | less -rX"
+if (( $+commands[emojify] )); then
+    alias gitlog="git log --oneline --decorate --graph --branches --tags --remotes --color | emojify | less -rX"
+else
+    alias gitlog="git log --oneline --decorate --graph --branches --tags --remotes"
+fi
 alias lzd='lazydocker'  # 短縮
 
 if (( $+commands[pyenv] )); then
