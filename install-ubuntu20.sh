@@ -41,7 +41,7 @@ sudo snap install htop
 # sudo snap install libreoffice
 sudo snap install ngrok
 # sudo snap install tor
-# sudo snap install vlc
+sudo snap install vlc
 sudo snap install youtube-dl
 # sudo snap install zoom-client
 
@@ -120,7 +120,7 @@ brew install jesseduffield/lazydocker/lazydocker
 # nvtop
 git clone https://github.com/Syllo/nvtop.git
 mkdir -p nvtop/build && cd nvtop/build
-sudo apt instal -y libncurses5-dev
+sudo apt install -y libncurses5-dev
 cmake ..
 sudo apt purge -y libncurses5-dev
 sudo make install
@@ -160,7 +160,7 @@ sudo apt install -y xclip
 sudo apt install -y aria2
 brew install ncdu
 brew install glances
-snap install ksuperkey
+snap install ksuperkey # KDEのみ
 
 # Font
 brew tap sanemat/font

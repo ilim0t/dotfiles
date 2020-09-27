@@ -2,9 +2,9 @@
 set -u
 
 # home directory
-sudo apt-get install xdg-user-dirs-gtk
+sudo apt-get install xdg-user-dirs-gtk # KDEのみ
 LANG=C xdg-user-dirs-gtk-update
-sudo apt-get purge xdg-user-dirs-gtk
+sudo apt-get purge xdg-user-dirs-gtk # KDEのみ
 
 # git
 git config --global user.email "ilim0t14@gmail.com"
