@@ -46,11 +46,24 @@ zplug "mrowa44/emojify", as:command, rename-to:emojify  # :tada: 等を絵文字
 zplug "stedolan/jq", from:gh-r, as:command, rename-to:jq  # emojifyの依存
 zplug "b4b4r07/emoji-cli", on:"stedolan/jq", defer:2  # 絵文字を入力する機能の追加
 zplug "plugins/docker-compose", from:oh-my-zsh
+# zplug "plugins/cargo", from:oh-my-zsh
 zplug "plugins/docker", from:oh-my-zsh
 zplug "plugins/extract", from:oh-my-zsh
 zplug "plugins/gitignore", from:oh-my-zsh
 zplug "lib/clipboard", from:oh-my-zsh
 zplug "lib/key-bindings", from:oh-my-zsh
+
+# テスト(お試し)段階の plugin
+zplug "modules/completion", from:prezto
+zplug "modules/history", from:prezto
+zplug "modules/utility", from:prezto
+zplug "modules/completion", from:prezto
+zplug "modules/git", from:prezto
+zplug "modules/gnu-utility", from:prezto
+zplug "modules/history", from:prezto
+zplug "modules/terminal", from:prezto
+zplug "modules/tmux", from:prezto
+# ~~, lazy:true
 
 # Install plugins if there are plugins that have not been installed
 if ! zplug check --verbose; then
