@@ -1,5 +1,7 @@
 {
   // General Settings
+  "window.zoomLevel": 0,
+
   "editor.fontFamily": "Ricty,Cica,Myrica M,Source Han Code JP,Cascadia Code,Fira Code,SF Mono Square",
   "editor.fontSize": 15,
   "editor.fontLigatures": true,
@@ -26,6 +28,9 @@
   "files.watcherExclude": {
     "**/.venv/**": true
   },
+
+  // Path Intellisense
+  "typescript.suggest.paths": false,
 
   // LaTeX Settings
   "latex-workshop.latex.recipes": [

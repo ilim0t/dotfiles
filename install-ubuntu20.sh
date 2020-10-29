@@ -12,7 +12,6 @@ curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh 
 export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
 brew tap beeftornado/rmtree
 
-sudo apt install -y openssh-server
 
 # Application
 # Chrome https://www.google.com/chrome/
@@ -132,7 +131,10 @@ rm -rf nvtop
 # Progmamming language manager
 # Python
 # pyenv
-brew install pyenv
+sudo apt install -y make build-essential libssl-dev zlib1g-dev libbz2-dev \
+    libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev \
+    xz-utils tk-dev libffi-dev liblzma-dev python-openssl git
+curl https://pyenv.run | bash
 
 # Pipenv
 sudo apt install -y pipenv python3-venv  # virtualenv 問題なければvirtualenvを実際に削除予定
@@ -154,6 +156,7 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 
 
 # Utility
+sudo apt install -y openssh-server
 sudo apt install -y direnv
 sudo apt install -y trash-cli
 sudo apt install -y xclip
