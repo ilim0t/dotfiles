@@ -1,5 +1,7 @@
 {
   // General Settings
+  "window.zoomLevel": 0,
+
   "editor.fontFamily": "Ricty,Cica,Myrica M,Source Han Code JP,Cascadia Code,Fira Code,SF Mono Square",
   "editor.fontSize": 15,
   "editor.fontLigatures": true,
@@ -26,6 +28,9 @@
   "files.watcherExclude": {
     "**/.venv/**": true
   },
+
+  // Path Intellisense
+  "typescript.suggest.paths": false,
 
   // LaTeX Settings
   "latex-workshop.latex.recipes": [
@@ -67,7 +72,7 @@
   ],
   "latex-workshop.view.pdf.viewer": "tab",
 
-  // Python setting
+  // Python Settings
   "python.languageServer": "Pylance",
   "python.analysis.typeCheckingMode": "basic", // Pylance 型チェック
 
@@ -98,27 +103,16 @@
   "[jsonc]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
+
+  // C++ Settings
   // "cpplint.cpplintPath": "~/.local/bin/cpplint", // 仮
   "C_Cpp.clang_format_fallbackStyle": "Chromium",
   "cmake.configureOnOpen": true,
-  // "cmake.debugConfig": {
-  //   "stopAtEntry": false,
-  //   "MIMode": "lldb",
-  //   "miDebuggerPath": "/usr/bin/lldb", // 絶対パスでないとエラー
-  //   "logging": {
-  //     "trace": false,
-  //     "engineLogging": false,
-  //     "traceResponse": false
-  //   }
-  // },
 
   // Others Language Settings
-  // "files.associations": {
-  //   "*.json": "jsonc"
-  // },
+  "files.associations": {
+    "*.json": "jsonc"
+  },
 
   // Uncategorized Setteings
   "meaningless": "VSCodeが自動で追記する際，最終行に書かれるようする"

@@ -2,6 +2,8 @@
 code --install-extension 13xforever.language-x86-64-assembly
 code --install-extension alefragnani.Bookmarks
 code --install-extension christian-kohler.path-intellisense
+code --install-extension codezombiech.gitignore
+code --install-extension CoenraadS.bracket-pair-colorizer
 code --install-extension DavidAnson.vscode-markdownlint
 code --install-extension dbaeumer.vscode-eslint
 code --install-extension eamodio.gitlens
@@ -13,6 +15,7 @@ code --install-extension fredericbonnet.cmake-test-adapter
 code --install-extension GitHub.vscode-pull-request-github
 code --install-extension hbenl.vscode-test-explorer
 code --install-extension humao.rest-client
+code --install-extension Ikuyadeu.r
 code --install-extension James-Yu.latex-workshop
 code --install-extension jebbs.plantuml
 code --install-extension littlefoxteam.vscode-python-test-adapter
@@ -33,6 +36,7 @@ code --install-extension ms-vsliveshare.vsliveshare
 code --install-extension msjsdiag.debugger-for-chrome
 code --install-extension p1c2u.docker-compose
 code --install-extension PKief.material-icon-theme
+code --install-extension quicktype.quicktype
 code --install-extension Rubymaniac.vscode-direnv
 code --install-extension rust-lang.rust
 code --install-extension tht13.html-preview-vscode
