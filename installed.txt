@@ -1,0 +1,35 @@
+ncdu
+
+# ksuperkey
+
+simplescreenrecorder
+imagemagick
+gnome-keyring # vscode setting sync 
+
+pavucontrol
+
+
+paprefs
+dnsutils
+google-cloud-sdk
+tor
+qbittorrent
+unrar
+vlc-plugin-fluidsynth
+tightvncserver
+gvncviewer
+aconnectgui
+amsynth
+patchage
+audacious
+timidity
+google-drive-ocamlfuse
+tree
+libffi-dev
+pdftk
+aptitude
+nvidia-driver-450
+netatalk
+ libsox-fmt-mp3
+ yakuake
+ easystroke

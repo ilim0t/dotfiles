@@ -1,0 +1,45 @@
+# ~/.config/pulse/default.pa に保存
+.include /etc/pulse/default.pa
+
+set-default-sink bluez_sink.CC_98_8B_E3_4D_32.a2dp_sink
+
+# null-sinkの有効化
+load-module module-null-sink sink_name=Virtual1
+load-module module-null-sink sink_name=Virtual2
+
+# null-sink に名前をつける
+update-sink-proplist Virtual1 device.description=Virtual1
+update-sink-proplist Virtual2 device.description=Virtual2
+
+update-source-proplist Virtual1.monitor device.description=Virtual1
+update-source-proplist Virtual2.monitor device.description=Virtual2
+
+# loopback moduleでnull-sinkの出力をデフォルトの出力先に設定
+load-module module-loopback source=Virtual1.monitor sink=bluez_sink.CC_98_8B_E3_4D_32.a2dp_sink adjust_time=0 latency_msec=1
+load-module module-loopback source=Virtual1.monitor sink=alsa_output.pci-0000_0d_00.4.analog-stereo adjust_time=0 latency_msec=1
+
+load-module module-loopback source=Virtual1.monitor sink=Virtual2 adjust_time=0 latency_msec=1
+load-module module-loopback source=alsa_input.usb-C-Media_Electronics_Inc._MARANTZ_M4U_20190520-00.mono-fallback sink=Virtual2 adjust_time=0 latency_msec=1
+
+# Commands
+
+# pactl list sinks
+# pactl list sources
+
+# pulseaudio -k
+# pulseaudio --start
+# pavucontrol
+
+
+# 設定
+
+# 再生
+# 聞きたい&配信したい音 [Virtual1]
+
+# 録音
+# Loopback to Starship/Matisse HD Audio Controller アナログステレオ から [Virtual1]
+# or
+# Loopback to WH-1000XM3 から [Virtual1]
+
+# Loopback to Virtual2 から [Virtual1]
+# Loopback to Virtual2 から [MARANTZ M4U モノ]
