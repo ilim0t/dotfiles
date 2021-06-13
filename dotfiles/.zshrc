@@ -190,6 +190,7 @@ export EDITOR=vim
 
 # pyenv
 if (( $+commands[pyenv] )); then
+    eval "$(pyenv init --path)"
     eval "$(pyenv init -)"
     export PIPENV_VENV_IN_PROJECT=1
     export PIPENV_SKIP_LOCK=1
@@ -276,6 +277,6 @@ google(){
 
 
 # zmodload が読み込まれている場合、計測結果を表示する
-if (which zprof > /dev/null) ;then
+if (which zprof >& /dev/null) ;then
   zprof | less
 fi
