@@ -3,7 +3,6 @@
 # zsh起動時の速度計測用 (不要なら以下1行をコメントアウト)
 # zmodload zsh/zprof && zprof
 
-
 # .zshrc のキャッシュを生成
 if [ ! -e $HOME/.zshrc.zwc ] || [ $HOME/.zshrc -nt $HOME/.zshrc.zwc ]; then
   zcompile $HOME/.zshrc
@@ -12,19 +11,15 @@ fi
 
 # 環境変数の設定
 path=(
+    /opt/homebrew/bin(N-/)  # M1 Homebrew
     /snap/bin(N-/)  # snap run
-    $HOME/.local/bin(N-/)  # added by pipx (https://github.com/pipxproject/pipx)
+    # $HOME/.local/bin(N-/)  # added by pipx (https://github.com/pipxproject/pipx)
     $HOME/.pyenv/bin(N-/)  # pyenv installer より
-    /usr/local/sbin(N-/)  # brew doctor (macOS) より
-    $HOME/.nvm/versions/node/v12.18.3/bin(N-/)
+    # /usr/local/sbin(N-/)  # brew doctor (macOS) より
     # /usr/local/cuda/bin(N-/)
     $path
 )
 
-LD_LIBRARY_PATH=(
-    # /usr/local/cuda/lib64(N-/)
-    $LD_LIBRARY_PATH
-)
 
 # Linuxbrew   
 if [ -d "/home/linuxbrew/.linuxbrew" ]; then
@@ -35,7 +30,11 @@ fi
 
 
 # zplugの読み込み
-source $HOME/.zplug/init.zsh
+if (( $+commands[brew] )) && [ -d "$(brew --prefix)/opt/zplug" ]; then
+    source $(brew --prefix zplug)/init.zsh
+else
+    source $HOME/.zplug/init.zsh
+fi
 
 # zplug plugins
 zplug 'zplug/zplug', hook-build:'zplug --self-manage'
@@ -213,13 +212,10 @@ if [ -e "$HOME/.cargo" ]; then
 fi
 
 # nvm 読み込み
-if [ -e "$HOME/.nvm/nvm.sh" ]; then
-    # nvm コマンドを上書き
-    function nvm() {
-        unfunction "$0" # 個のnvm関数定義を解除、以降本来のnvm関数へ
-        source "$HOME/.nvm/nvm.sh"
-        $0 "$@"  # nvm **args を実行
-    }
+if (( $+commands[brew] )) && [ -d "$(brew --prefix)/opt/nvm" ]; then
+    source $(brew --prefix nvm)/nvm.sh
+else
+    source $HOME/.nvm/init.zsh
 fi
 
 # poetry 設定
@@ -238,7 +234,7 @@ else
 fi
 alias lzd='lazydocker'  # 短縮
 
-if (( $+commands[pyenv] )); then
+if [ $+commands[pyenv] -a $+commands[brew] ]; then
     alias brew='env PATH=${PATH//$(pyenv root)\/shims/} brew'
 fi
 
