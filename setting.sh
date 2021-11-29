@@ -15,14 +15,13 @@ git config --global tag.gpgSign true
 git config --global user.signingkey 404D725FE3C50AE0
 
 # pyenv
-pyenv install 3.8.5
+# pyenv install 3.9.9
 
-#nvm
-nvm install --lts
-nvm install-latest-npm
+# nvm
+nvm install stable --latest-npm
 
 # cpplint
-pipx install cpplint
+# pipx install cpplint
 
 # fonts
 # sudo cp * /usr/local/share/fonts/

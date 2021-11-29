@@ -36,31 +36,32 @@ brew tap beeftornado/rmtree
 
 # Snap
 sudo snap install htop
-# sudo snap install discord
 # sudo snap install libreoffice
-sudo snap install ngrok
+# sudo snap install ngrok
 # sudo snap install tor
 sudo snap install vlc
-sudo snap install youtube-dl
+# sudo snap install youtube-dl
 # sudo snap install zoom-client
 
 
 # Driver
+
 # CUDA
 # https://developer.nvidia.com/cuda-downloads に従う
-wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-ubuntu2004.pin
-sudo mv cuda-ubuntu2004.pin /etc/apt/preferences.d/cuda-repository-pin-600
-sudo apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/7fa2af80.pub
-sudo add-apt-repository "deb http://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/ /"
-sudo apt-get update
-sudo apt-get -y install cuda-11-0
+# wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-ubuntu2004.pin
+# sudo mv cuda-ubuntu2004.pin /etc/apt/preferences.d/cuda-repository-pin-600
+# sudo apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/7fa2af80.pub
+# sudo add-apt-repository "deb http://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/ /"
+# sudo apt-get update
+# sudo apt-get -y install cuda-11-0
 
 # cuDNN
 # https://developer.nvidia.com/rdp/cudnn-download に従い3つのdebをinstallする
 
 # Nvidia Driver
-# sudo add-apt-repository ppa:graphics-drivers/ppa
-# sudo apt install -y nvidia-driver-455
+sudo add-apt-repository -y ppa:graphics-drivers
+sudo apt update
+sudo apt install -y nvidia-driver-495
 
 # Docker
 sudo apt-get install -y \
@@ -72,7 +73,7 @@ sudo apt-get install -y \
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 sudo add-apt-repository \
    "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-   $(lsb_release -cs)  \
+   $(lsb_release -cs) \
    stable"
 sudo apt-get update
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io
@@ -80,11 +81,11 @@ sudo apt-get install -y docker-ce docker-ce-cli containerd.io
 # sudo apt install -y docker.io
 # sudo systemctl enable --now docker
 
-# sudo groupadd docker  # 問題なければこのまま削除
+sudo groupadd docker
 sudo gpasswd -a $USER docker
 
 # docker-compose
-sudo curl -L "https://github.com/docker/compose/releases/download/1.27.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 
@@ -120,6 +121,7 @@ sudo apt install -y tig
 brew install jesseduffield/lazydocker/lazydocker
 
 # nvtop
+# sudo apt install -y nvtop
 git clone https://github.com/Syllo/nvtop.git
 mkdir -p nvtop/build && cd nvtop/build
 sudo apt install -y libncurses5-dev
@@ -130,23 +132,19 @@ sudo make install
 cd ../../
 rm -rf nvtop
 
-
 # Progmamming language manager
 # Python
 # pyenv
-sudo apt install -y make build-essential libssl-dev zlib1g-dev libbz2-dev \
-    libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev \
-    xz-utils tk-dev libffi-dev liblzma-dev python-openssl git
+sudo apt install -y make build-essential libssl-dev zlib1g-dev \
+    libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm \
+    libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
 curl https://pyenv.run | bash
 
 # Pipenv
 sudo apt install -y pipenv python3-venv  # virtualenv 問題なければvirtualenvを実際に削除予定
 
-# pipx
-sudo apt install -y pipx
-
 # Node.js
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
 
 # Yarn
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
@@ -155,7 +153,7 @@ sudo apt update
 sudo apt install --no-install-recommends yarn
 
 # Rust
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+# curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 
 
 # Utility
@@ -163,10 +161,15 @@ sudo apt install -y openssh-server
 sudo apt install -y direnv
 sudo apt install -y trash-cli
 sudo apt install -y xclip
-sudo apt install -y aria2
-brew install ncdu
-brew install glances
-snap install ksuperkey # KDEのみ
+# sudo apt install -y aria2
+# brew install ncdu
+# brew install glances
+sudo snap install ksuperkey # KDEのみ
+sudo apt install -y simplescreenrecorder
+sudo apt install -y pavucontrol
+sudo apt install -y easystroke
+sudo apt install -y pdftk
+sudo apt install -y yakuake
 
 # Font
 brew tap sanemat/font

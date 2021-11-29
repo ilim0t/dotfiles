@@ -1,12 +1,12 @@
 ncdu
+easystroke
+simplescreenrecorder
+pavucontrol
 
 # ksuperkey
 
-simplescreenrecorder
 imagemagick
 gnome-keyring # vscode setting sync 
-
-pavucontrol
 
 
 paprefs
@@ -28,8 +28,6 @@ tree
 libffi-dev
 pdftk
 aptitude
-nvidia-driver-450
 netatalk
- libsox-fmt-mp3
- yakuake
- easystroke
+libsox-fmt-mp3
+yakuake
