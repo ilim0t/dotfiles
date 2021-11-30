@@ -215,7 +215,7 @@ fi
 if (( $+commands[brew] )) && [ -d "$(brew --prefix)/opt/nvm" ]; then
     source $(brew --prefix nvm)/nvm.sh
 else
-    source $HOME/.nvm/init.zsh
+    source $HOME/.nvm/nvm.sh
 fi
 
 # poetry 設定
