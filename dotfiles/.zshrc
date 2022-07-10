@@ -1,4 +1,4 @@
-# Created by ilim0t14 for 5.6.2
+# Created by ilim for 5.6.2
 
 # zsh起動時の速度計測用 (不要なら以下1行をコメントアウト)
 # zmodload zsh/zprof && zprof
@@ -21,10 +21,10 @@ path=(
 )
 
 
-# Linuxbrew   
-if [ -d "/home/linuxbrew/.linuxbrew" ]; then
+# Linuxbrew
+if [ -d "/home/linuxbrew/.linuxbrew" ]; then # root install
     eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
-elif [ -d "$HOME/.linuxbrew" ]; then
+elif [ -d "$HOME/.linuxbrew" ]; then  # non-root install
     eval $($HOME/.linuxbrew/bin/brew shellenv)
 fi
 
@@ -211,18 +211,17 @@ if [ -e "$HOME/.cargo" ]; then
     source $HOME/.cargo/env
 fi
 
-# nvm 読み込み
-if (( $+commands[brew] )) && [ -d "$(brew --prefix)/opt/nvm" ]; then
-    source $(brew --prefix nvm)/nvm.sh
-else
-    source $HOME/.nvm/nvm.sh
-fi
+# nodenv 読み込み
+eval "$(nodenv init -)"
+
+# rbenv 読み込み
+eval "$(rbenv init - zsh)"
 
 # poetry 設定
 export POETRY_VIRTUALENVS_IN_PROJECT=1
 
 # 文字コード指定
-# export LANG="ja_JP.UTF-8" (もともとされてたのでコメントアウト 問題なければ削除)
+# export LANG="ja_JP.UTF-8"  # (もともとされてたのでコメントアウト 問題なければ削除)
 
 
 # alias
