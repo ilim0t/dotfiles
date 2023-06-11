@@ -13,10 +13,8 @@ fi
 path=(
     /opt/homebrew/bin(N-/)  # M1 Homebrew
     /snap/bin(N-/)  # snap run
-    # $HOME/.local/bin(N-/)  # added by pipx (https://github.com/pipxproject/pipx)
     $HOME/.pyenv/bin(N-/)  # pyenv installer より
     /usr/local/sbin(N-/)  # brew doctor (M1 macOS) より
-    # /usr/local/cuda/bin(N-/)
     $path
 )
 
