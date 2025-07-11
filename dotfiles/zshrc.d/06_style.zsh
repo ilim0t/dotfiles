@@ -40,6 +40,9 @@ setopt extended_history
 # リダイレクト時(command > path)に既にファイルがある場合上書きできないようにする (やりたいときは >! を使う)
 setopt noclobber
 
+# zsh_historyに時刻を記録
+setopt extended_history
+
 # zstyle
 
 # 補完において

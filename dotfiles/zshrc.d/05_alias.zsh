@@ -10,7 +10,7 @@ else
 fi
 
 # rmで完全削除せずに、ゴミ箱相当の場所へ送るように
-if (($ + commands[trash - put])); then
+if (( $+commands[trash-put] )); then
     alias rm=trash-put
 fi
 
@@ -49,3 +49,4 @@ esac
 ###########################################
 
 alias lzd='lazydocker'
+alias dockerprune='docker image prune -f && docker container prune -f && docker volume prune -f && docker network prune -f'
